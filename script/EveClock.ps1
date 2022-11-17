@@ -2239,7 +2239,7 @@ $pointed[0]= Reso 9 # point obj
  
 # 色指定、色オブジェクト 
 
-$trans= [System.Drawing.Color]::FromName($transparent)	# 透明色
+# $trans= [System.Drawing.Color]::FromName($transparent)	# 透明色
 $purple= [System.Drawing.Color]::FromName("blueviolet")
 $magenta= [System.Drawing.Color]::FromName("orchid")
 $red= [System.Drawing.Color]::FromName("red")
@@ -2249,22 +2249,28 @@ $lime= [System.Drawing.Color]::FromName("greenyellow")
 $blue= [System.Drawing.Color]::FromName("blue")
 $aqua= [System.Drawing.Color]::FromName("turquoise")
 
-$gray= [System.Drawing.Color]::FromArgb(166,60,60,60)
-$silver= [System.Drawing.Color]::FromArgb(150,250,250,250)
+# $gray= [System.Drawing.Color]::FromArgb(166,60,60,60)
+$silver= [System.Drawing.Color]::FromArgb(255,250,250,250)
 $white= [System.Drawing.Color]::FromArgb(255,251,250,245)	# 生成り色 A:254
 $black= [System.Drawing.Color]::FromArgb(248,24,39,61) # 59,71)	# 暗黒色改 Aは高級感 236,34,62,68
 
-$rgb= [System.Drawing.Color]::FromArgb(200,125,125,125)
-
+$rgb= [System.Drawing.Color]::FromArgb(255,125,125,125)
+# first
 # $rr= [System.Drawing.Color]::FromArgb(150,250,50,50)
 # $gb= [System.Drawing.Color]::FromArgb(150,50,250,250)
 # $rb= [System.Drawing.Color]::FromArgb(150,250,50,250)
+
 # $rg= [System.Drawing.Color]::FromArgb(150,250,250,50)
 # $gg= [System.Drawing.Color]::FromArgb(250,50,250,50)
 
-$rr= [System.Drawing.Color]::FromArgb(150,50,250,50)
-$gb= [System.Drawing.Color]::FromArgb(150,250,50,250)
-$rb= [System.Drawing.Color]::FromArgb(150,250,250,50)
+# second
+# $rr= [System.Drawing.Color]::FromArgb(150,50,250,50)
+# $gb= [System.Drawing.Color]::FromArgb(150,250,50,250)
+# $rb= [System.Drawing.Color]::FromArgb(150,250,250,50)
+# third
+$rr= [System.Drawing.Color]::FromArgb(150,50,50,250)
+$gb= [System.Drawing.Color]::FromArgb(150,250,250,50)
+$rb= [System.Drawing.Color]::FromArgb(150,50,250,250)
 
 
 # $trans_brush= New-Object System.Drawing.SolidBrush($trans)
@@ -2285,7 +2291,7 @@ $Millisecond_pen= New-Object System.Drawing.Pen($rgb, 1)
 $white_pen= New-Object System.Drawing.Pen($white, 1)
 $blue_pen= New-Object System.Drawing.Pen($blue, 2)
 $silver_pen= New-Object System.Drawing.Pen($silver, 1)
-$gray_pen= New-Object System.Drawing.Pen($gray, 2)
+# $gray_pen= New-Object System.Drawing.Pen($gray, 2)
  	
 # グラフィックス領域の確保 
 	 
