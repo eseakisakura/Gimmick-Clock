@@ -946,16 +946,16 @@ function Moder([string]$sw, [string]$md){
 	switch($sw){
 	'Start'{
 		switch($md){
-		'Watched'{		$Watched.tmr.Start();		break;
+		'Watched'{	$Watched.tmr.Start();		break;
 		}'StopWatched'{	$StopWatched.tmr.Start();	break;
-		}'Timered'{		$Timered.tmr.Start()
+		}'Timered'{	$Timered.tmr.Start()
 		}
 		} #sw
 	}'Stop'{
 		switch($md){
-		'Watched'{		$Watched.tmr.Stop();		break;
+		'Watched'{	$Watched.tmr.Stop();		break;
 		}'StopWatched'{	$StopWatched.tmr.Stop();	break;
-		}'Timered'{		$Timered.tmr.Stop()
+		}'Timered'{	$Timered.tmr.Stop()
 		}
 		} #sw
 	}
@@ -1216,7 +1216,7 @@ $slide_Pictbox.Refresh()
 	$buff.Graphics.DrawString($now[2], $Fona, $Second_brush, $pos[0],$pos[1])
 
 
-　　$buff.Render($graphics) # レンダリング
+　　　　$buff.Render($graphics) # レンダリング
 	# $image.MakeTransparent($black)
 	$Pictbox.Refresh()
 
@@ -1353,7 +1353,7 @@ class from_DrawTime{
 	}
 
  } #class
- 	
+ 
 class from_DrawStopWatch{ 
 
 	[int[]] $IMG= $IMG
@@ -1495,17 +1495,17 @@ function Mode(){
 	if($script:mode_change[2] -eq $True){
 
 			switch($script:mode_change[1]){
-			'Watched'{		$Watched_gimmick.Timer();		break;
+			'Watched'{	$Watched_gimmick.Timer();	break;
 			}'StopWatched'{	$StopWatched_gimmick.Timer();	break;	##StopWatch_gimmick;
-			}'Timered'{		$StopWatched_gimmick.Timer()
+			}'Timered'{	$StopWatched_gimmick.Timer()
 			}
 			} #sw
 
 	}else{
 			switch($script:mode_change[0]){
-			'Watched'{		$Watched.Timer();			break;
-			}'StopWatched'{	$StopWatched.Timer();		break;
-			}'Timered'{		$Timered.Timer()			##Timered; break;
+			'Watched'{	$Watched.Timer();	break;
+			}'StopWatched'{	$StopWatched.Timer();	break;
+			}'Timered'{	$Timered.Timer()	##Timered; break;
 			}
 			} #sw
 	}
@@ -2250,24 +2250,29 @@ $blue= [System.Drawing.Color]::FromName("blue")
 $aqua= [System.Drawing.Color]::FromName("turquoise")
 
 $gray= [System.Drawing.Color]::FromArgb(166,60,60,60)
-$silver= [System.Drawing.Color]::FromArgb(166,240,240,240)
-$white= [System.Drawing.Color]::FromName("White")
-$black= [System.Drawing.Color]::FromName("Black") # 背景色
+$silver= [System.Drawing.Color]::FromArgb(150,250,250,250)
+$white= [System.Drawing.Color]::FromArgb(255,251,250,245)	# 生成り色 A:254
+$black= [System.Drawing.Color]::FromArgb(248,24,39,61) # 59,71)	# 暗黒色改 Aは高級感 236,34,62,68
 
-$rgb= [System.Drawing.Color]::FromArgb(155,120,120,120)
-$rr= [System.Drawing.Color]::FromArgb(150,250,50,50)
-$gb= [System.Drawing.Color]::FromArgb(150,50,250,250)
-$rb= [System.Drawing.Color]::FromArgb(150,250,50,250)
-$rg= [System.Drawing.Color]::FromArgb(150,250,250,50)
-$gg= [System.Drawing.Color]::FromArgb(255,0,255,0)
+$rgb= [System.Drawing.Color]::FromArgb(200,125,125,125)
+
+# $rr= [System.Drawing.Color]::FromArgb(150,250,50,50)
+# $gb= [System.Drawing.Color]::FromArgb(150,50,250,250)
+# $rb= [System.Drawing.Color]::FromArgb(150,250,50,250)
+# $rg= [System.Drawing.Color]::FromArgb(150,250,250,50)
+# $gg= [System.Drawing.Color]::FromArgb(250,50,250,50)
+
+$rr= [System.Drawing.Color]::FromArgb(150,50,250,50)
+$gb= [System.Drawing.Color]::FromArgb(150,250,50,250)
+$rb= [System.Drawing.Color]::FromArgb(150,250,250,50)
 
 
-$trans_brush= New-Object System.Drawing.SolidBrush($trans)
-$gray_brush= New-Object System.Drawing.SolidBrush($gray)
+# $trans_brush= New-Object System.Drawing.SolidBrush($trans)
+# $gray_brush= New-Object System.Drawing.SolidBrush($gray)
 $silver_brush= New-Object System.Drawing.SolidBrush($silver)
 $black_brush= New-Object System.Drawing.SolidBrush($black)
 $white_brush= New-Object System.Drawing.SolidBrush($white)
-$frame_brush= New-Object System.Drawing.SolidBrush($rg)
+# $frame_brush= New-Object System.Drawing.SolidBrush($rg)
 $Hour_brush= New-Object System.Drawing.SolidBrush($rr)
 $Minute_brush= New-Object System.Drawing.SolidBrush($gb)
 $Second_brush= New-Object System.Drawing.SolidBrush($rb)
@@ -2281,7 +2286,7 @@ $white_pen= New-Object System.Drawing.Pen($white, 1)
 $blue_pen= New-Object System.Drawing.Pen($blue, 2)
 $silver_pen= New-Object System.Drawing.Pen($silver, 1)
 $gray_pen= New-Object System.Drawing.Pen($gray, 2)
- 
+ 	
 # グラフィックス領域の確保 
 	 
 [int[]]$IMG= @(600, 600) # グラフのサイズ 
@@ -2371,7 +2376,7 @@ $mask2_graphics= [System.Drawing.Graphics]::FromImage($mask2_image)
 $crop2_image= New-Object System.Drawing.Bitmap($IMG)
 $crop2_graphics= [System.Drawing.Graphics]::FromImage($crop2_image)
 
-$load_image= New-Object System.Drawing.Bitmap(".\flashapr2b.jpg")
+# $load_image= New-Object System.Drawing.Bitmap(".\flashapr2b.jpg")
   
 # イベント登録 ------ 
 
@@ -2664,7 +2669,7 @@ $mnu.Items.AddRange(@($menu_f,$menu_t,$menu_a,$menu_alarmstop))
 
 $frm= New-Object System.Windows.Forms.Form
 $frm.Size= @(600, 640) -join "," # string出力
-$frm.Text= "Gimmick Clock"
+$frm.Text= "Eve Clock"
 $frm.FormBorderStyle= "Sizable"
 $frm.StartPosition= "WindowsDefaultLocation"
 $frm.MaximizeBox= $True
