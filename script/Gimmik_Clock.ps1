@@ -1,10 +1,10 @@
-# —§•û‘Ì‚ÌŒÅ’è’l‚Ö 
-# 900pxˆÈã‚ÌƒXƒ‰ƒCƒh‘Î‰
+ï»¿# ç«‹æ–¹ä½“ã®å›ºå®šå€¤ã¸ 
+# 900pxä»¥ä¸Šã®ã‚¹ãƒ©ã‚¤ãƒ‰å¯¾å¿œ
 
 
 
-#  stopwatch gimmik ‚Å0‚Ì‚¿Aƒ}ƒCƒiƒX’l‚ª•\¦‚³‚ê‚é
-# Ellipse_pos([bool]$sw)‚Ì–â‘è
+#  stopwatch gimmik ã§0ã®ã¡ã€ãƒã‚¤ãƒŠã‚¹å€¤ãŒè¡¨ç¤ºã•ã‚Œã‚‹
+# Ellipse_pos([bool]$sw)ã®å•é¡Œ
  
 Add-Type -AssemblyName System.Windows.Forms > $null 
 Add-Type -AssemblyName System.Drawing > $null
@@ -27,27 +27,11 @@ function Recolor_Set([int]$nn){
 		$script:Colour= @($Hour_pen2, $Minute_pen2, $Second_pen2)
 	}
 	} #sw
-
-	$Watched.Color= $script:Color
-	$Watched.Colour= $script:Colour
-
-	$StopWatched.Color= $script:Color
-	$StopWatched.Colour= $script:Colour
-
-	$Timered.Color= $script:Color
-	$Timered.Colour= $script:Colour
-
-	$StopWatched_gimmick.Color= $script:Color
-	$StopWatched_gimmick.Colour= $script:Colour
-
-	$Watched_gimmick.Color= $script:Color
-	$Watched_gimmick.Colour= $script:Colour
-
  } #func
  
 function Resize_Set(){ 
 
-	$script:IMG= @($frm.Size.Width, ($frm.Size.Height- 40)) # ƒOƒ‰ƒt‚ÌƒTƒCƒY
+	$script:IMG= @($frm.Size.Width, ($frm.Size.Height- 40)) # ã‚°ãƒ©ãƒ•ã®ã‚µã‚¤ã‚º
 
 	$Watched.Size($IMG[0])
 	$StopWatched.Size($IMG[0])
@@ -73,7 +57,7 @@ function Resize_Set(){
 	$Swipe.Size($buff_size[1])
 
 
-	$script:image= New-Object System.Drawing.Bitmap($buff_size) # ‘‚«‚ŞêŠ
+	$script:image= New-Object System.Drawing.Bitmap($buff_size) # æ›¸ãè¾¼ã‚€å ´æ‰€
 	# $script:uraimage= New-Object System.Drawing.Bitmap($buff_size)
 
 	$script:Pictbox.ClientSize= $image.Size # Pictbox ha New-Object fuka
@@ -81,7 +65,7 @@ function Resize_Set(){
 
 	$script:graphics= [System.Drawing.Graphics]::FromImage($image)
 	# $script:uragraphics= [System.Drawing.Graphics]::FromImage($uraimage)
-	$script:contxtb.MaximumBuffer= @($buff_size[0],$buff_size[1]) -join "," # stringo—Í
+	$script:contxtb.MaximumBuffer= @($buff_size[0],$buff_size[1]) -join "," # stringå‡ºåŠ›
 	$script:buff= $contxtb.Allocate($graphics, $Pictbox.ClientRectangle)
 
 	$script:Fona= New-Object System.Drawing.Font("Georgia",(($IMG[0]+ $IMG[1])* 0.05/ 2)) # Lucida Console  Garamond  Verdana  Impact
@@ -108,7 +92,7 @@ function Ellipse_pos([float]$num, [float]$width, [float]$height, [bool]$sw){
 
 	[float[]]$wid= ($IMG[0]* $width), ($IMG[1]* $width)
 
-	[float]$rad= $num* $pi* 2/ $IMG[0]		# ‘SˆÊ‘ŠŠp‚ğxÀ•W‚ÌÅ‘å’l‚ÅŠ„‚Á‚Ä‚¨‚­
+	[float]$rad= $num* $pi* 2/ $IMG[0]		# å…¨ä½ç›¸è§’ã‚’xåº§æ¨™ã®æœ€å¤§å€¤ã§å‰²ã£ã¦ãŠã
 
 
 	[float]$fx= $height* [Math]::Cos($rad)
@@ -148,7 +132,7 @@ function XYpos([float]$num, [float]$width, [float]$height){
 	[float[]]$rad= 0,0,0, 0,0,0
 
 	$rad[0]= ($num+ $width)* $pi* 2/ $IMG[0]
-	$rad[1]= $num* $pi* 2/ $IMG[0]		# ‘SˆÊ‘ŠŠp‚ğxÀ•W‚ÌÅ‘å’l‚ÅŠ„‚Á‚Ä‚¨‚­
+	$rad[1]= $num* $pi* 2/ $IMG[0]		# å…¨ä½ç›¸è§’ã‚’xåº§æ¨™ã®æœ€å¤§å€¤ã§å‰²ã£ã¦ãŠã
 	$rad[2]= ($num- $width)* $pi* 2/ $IMG[0]
 
 	$rad[3]= ($num+ $IMG[0]/ 2- $width)* $pi* 2/ $IMG[0]
@@ -269,12 +253,12 @@ function Img_wall(){
 
 	$buff.Graphics.Clear($gg)
 	$buff.Graphics.FillEllipse($black_brush, ($IMG[0]* 0.1),($IMG[1]* 0.1), ($IMG[0]* 0.8),($IMG[1]* 0.8))
-@@$buff.Render($mask_graphics) # ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ã€€ã€€$buff.Render($mask_graphics) # ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
 	$mask_image.MakeTransparent($black)
 
 	$buff.Graphics.Clear($gg)
 	$buff.Graphics.FillEllipse($black_brush, ($IMG[0]* 0.15),($IMG[1]* 0.15), ($IMG[0]* 0.7),($IMG[1]* 0.7))
-@@$buff.Render($mask2_graphics) # ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ã€€ã€€$buff.Render($mask2_graphics) # ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
 	$mask2_image.MakeTransparent($black)
 
 	[float]$xy= $load_image.Width/ $load_image.Height
@@ -293,17 +277,17 @@ function Img_wall(){
 
 	$buff.Graphics.DrawImage($load_image, $resizer[0],$resizer[1], $resizer[2],$resizer[3])
 	$buff.Graphics.DrawImage($mask_image, $Pictbox.ClientRectangle)
-@@$buff.Render($crop_graphics) # ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ã€€ã€€$buff.Render($crop_graphics) # ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
 	$crop_image.MakeTransparent($gg)
 
 	$buff.Graphics.DrawImage($load_image, $resizer[0],$resizer[1], $resizer[2],$resizer[3])
 	$buff.Graphics.DrawImage($mask2_image, $Pictbox.ClientRectangle)
-@@$buff.Render($crop2_graphics) # ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ã€€ã€€$buff.Render($crop2_graphics) # ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
 	$crop2_image.MakeTransparent($gg)
 
 	# $buff.Graphics.DrawImage($crop_image, $Pictbox.ClientRectangle)
 	# $buff.Graphics.DrawImage($crop2_image, $Pictbox.ClientRectangle)
-@@# $buff.Render($graphics) # ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ã€€ã€€# $buff.Render($graphics) # ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
 	# $Pictbox.Refresh()
 
  } #func
@@ -331,7 +315,10 @@ function Moder([string]$sw, [string]$md){
 	} #sw
  } #func
  
-function DrawStopWatch([float[]]$elp, [string[]]$now, [float[]]$alm, [array]$triangle, [array]$cercle){ 
+function DrawStopWatch([float[]]$elp, [string[]]$now, [float[]]$alm){ 
+
+	[array]$triangle=  $script:Color
+	[array]$cercle= $script:Colour
 
 	$buff.Graphics.Clear($black)
 
@@ -440,16 +427,19 @@ function DrawStopWatch([float[]]$elp, [string[]]$now, [float[]]$alm, [array]$tri
 	$buff.Graphics.DrawString($now[2], $Fona, $triangle[2], $pos[0],$pos[1])
 
 
-@@$buff.Render($graphics) # ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ã€€ã€€$buff.Render($graphics) # ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
 	$Pictbox.Refresh()
 
  } #func
  
-function DrawTime([float[]]$elp, [string[]]$now, [float[]]$alm, [array]$triangle, [array]$cercle){ 
+function DrawTime([float[]]$elp, [string[]]$now, [float[]]$alm){ 
+
+	[array]$triangle=  $script:Color
+	[array]$cercle= $script:Colour
 
 # ----- $milsec
 
-	$buff.Graphics.Clear($black)
+	$buff.Graphics.Clear($black)	
 	# $buff.Graphics.DrawImage($crop_image, $Pictbox.ClientRectangle)
 
 	if($setalarm[3] -eq $True){
@@ -581,7 +571,7 @@ function DrawTime([float[]]$elp, [string[]]$now, [float[]]$alm, [array]$triangle
 	$buff.Graphics.DrawString($now[2], $Fona, $triangle[2], $pos[0],$pos[1])
 
 
-@@@@$buff.Render($graphics) # ƒŒƒ“ƒ_ƒŠƒ“ƒO
+ã€€ã€€ã€€ã€€$buff.Render($graphics) # ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
 	# $image.MakeTransparent($black)
 	$Pictbox.Refresh()
 
@@ -591,9 +581,10 @@ function DrawTime([float[]]$elp, [string[]]$now, [float[]]$alm, [array]$triangle
 	 
 class from_Swipe{ 
 
-	# •Ï”’è‹`
-	[int[]] $Fibonacci_num= 0,1,1,2, 3,5,8,13, 21,34,55,89, 144  # 233,377,610,987,
-	[int] $j # Fibonacci count
+	# å¤‰æ•°å®šç¾©
+	[int[]]  $Fibonacci_num= 0,1,1,2, 3,5,8,13, 21,34,55,89, 144,233,377,610, 987,1597,2584,4181  #
+	[int] $count # Fibonacci count
+	[int] $j
 	[string] $sw
 	[bool] $toggle # insert ji err tame
 
@@ -601,8 +592,9 @@ class from_Swipe{
 	[int] $pix
 	[object] $tmr
 
-	from_Swipe([int] $imgy ){ # ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-		$this.j= 12
+	from_Swipe([int] $imgy ){ # ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+
+		$this.count= $this.Counter($imgy)
 		$this.sw= "insert"
 		$this.toggle= $True
 
@@ -614,9 +606,17 @@ class from_Swipe{
 		$this.tmr.Enabled= $False
 	}
 
+	[int] Counter([int] $imgy ){ #ã‚¯ãƒ©ã‚¹ ã‚¹ã‚³ãƒ¼ãƒ— ãƒ¡ã‚½ãƒƒãƒ‰
+		for([int] $i= 0; $i -lt $this.Fibonacci_num.Length; $i++){
+			if($this.Fibonacci_num[$i] -ge $imgy/ 3){ break; }
+		} #
+		$i--;
+		return $i
+	}
+
 	Size([int] $imgy ){
 
-		$this.j= 12
+		$this.count= $this.Counter($imgy)
 		$this.pos= $imgy
 		$this.pix= [Math]::Floor($imgy/ 3)
 
@@ -633,7 +633,9 @@ class from_Swipe{
 		$script:slide_Pictbox.Location= @(-10, $nn) -join ","
 	}
 
-	Start(){ # ƒƒ\ƒbƒh oneshot
+	Start(){ # ãƒ¡ã‚½ãƒƒãƒ‰ oneshot
+
+		$this.j= $this.count
 
 		$this.tmr.Start()
 		$this.toggle= $False
@@ -647,7 +649,6 @@ class from_Swipe{
 	Stop(){
 		$this.Tmr.Stop()
 		$this.toggle= $True
-		$this.j= 12
 
 		switch($this.sw){
 		'insert'{	$this.sw= "eject";
@@ -682,7 +683,7 @@ class from_Swipe{
  
 class from_Short_signal{ 
 
-	# ƒtƒB[ƒ‹ƒh
+	# ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰
 	[object] $tmr
 	[int] $level
 	[int] $count
@@ -691,7 +692,7 @@ class from_Short_signal{
 	[System.Diagnostics.Stopwatch] $swh
 	[System.Media.SoundPlayer] $mda
 
-	from_Short_signal(){ # ƒRƒ“ƒXƒgƒ‰ƒNƒ^ default‰»‚·‚é‚Æ‚«
+	from_Short_signal(){ # ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ defaultåŒ–ã™ã‚‹ã¨ã
 
 		$this.tmr= New-Object System.Windows.Forms.Timer
 		$this.tmr.Interval= 100
@@ -706,7 +707,7 @@ class from_Short_signal{
 		$this.mda= New-Object System.Media.SoundPlayer
 	}
 
-	Start([int]$nn,[int]$aa){ # ƒƒ\ƒbƒh
+	Start([int]$nn,[int]$aa){ # ãƒ¡ã‚½ãƒƒãƒ‰
 		$this.level= 1
 		$this.mda.SoundLocation= $this.sound_path[$nn]
 		$this.all= $aa
@@ -752,7 +753,7 @@ class from_Short_signal{
  
 class from_Timer_alarm{ 
 
-	# ƒtƒB[ƒ‹ƒh
+	# ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰
 	[object] $tmr
 	[int] $level
 	[int] $count
@@ -761,16 +762,16 @@ class from_Timer_alarm{
 	[System.Diagnostics.Stopwatch] $swh
 	[System.Media.SoundPlayer] $mda
 
-	from_Timer_alarm(){ # ƒRƒ“ƒXƒgƒ‰ƒNƒ^ default‰»‚·‚é‚Æ‚«
+	from_Timer_alarm(){ # ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ defaultåŒ–ã™ã‚‹ã¨ã
 
 		$this.tmr= New-Object System.Windows.Forms.Timer
 		$this.tmr.Interval= 100
 		$this.tmr.Enabled= $False
 
-		$this.sound_path[0]= "C:\data\XP HD 22 3 28\ƒf[ƒ^\ƒGƒ€ƒs[ƒXƒŠ[\All\Electronica\tATu\01-ƒI[ƒ‹ƒUƒVƒ“ƒOƒXƒV[ƒZƒbƒh(ƒ‰ƒWƒIƒ”ƒ@[ƒWƒ‡ƒ“).wav"
+		$this.sound_path[0]= "C:\data\XP HD 22 3 28\ãƒ‡ãƒ¼ã‚¿\ã‚¨ãƒ ãƒ”ãƒ¼ã‚¹ãƒªãƒ¼\All\Electronica\tATu\01-ã‚ªãƒ¼ãƒ«ã‚¶ã‚·ãƒ³ã‚°ã‚¹ã‚·ãƒ¼ã‚»ãƒƒãƒ‰(ãƒ©ã‚¸ã‚ªãƒ´ã‚¡ãƒ¼ã‚¸ãƒ§ãƒ³).wav"
 		$this.sound_path[1]= ""
 		$this.sound_path[2]= ""
-		$this.sound_path[3]= "C:\data\XP HD 22 3 28\ƒf[ƒ^\ƒGƒ€ƒs[ƒXƒŠ[\All\Electronica\tATu\01-ƒI[ƒ‹ƒUƒVƒ“ƒOƒXƒV[ƒZƒbƒh(ƒ‰ƒWƒIƒ”ƒ@[ƒWƒ‡ƒ“).wav"
+		$this.sound_path[3]= "C:\data\XP HD 22 3 28\ãƒ‡ãƒ¼ã‚¿\ã‚¨ãƒ ãƒ”ãƒ¼ã‚¹ãƒªãƒ¼\All\Electronica\tATu\01-ã‚ªãƒ¼ãƒ«ã‚¶ã‚·ãƒ³ã‚°ã‚¹ã‚·ãƒ¼ã‚»ãƒƒãƒ‰(ãƒ©ã‚¸ã‚ªãƒ´ã‚¡ãƒ¼ã‚¸ãƒ§ãƒ³).wav"
 
 		$this.level= 0
 		$this.count= 0
@@ -779,7 +780,7 @@ class from_Timer_alarm{
 		$this.mda= New-Object System.Media.SoundPlayer
 	}
 
-	Start([int]$nn){ # ƒƒ\ƒbƒh
+	Start([int]$nn){ # ãƒ¡ã‚½ãƒƒãƒ‰
 		$this.level= 1
 		$this.mda.SoundLocation= $this.sound_path[$nn]
 		$this.tmr.Start()
@@ -794,7 +795,7 @@ class from_Timer_alarm{
 		$this.tmr.Stop()
 	}
 
-	[void] Timer(){ # void‚Ío—Í‚Ìw’è
+	[void] Timer(){ # voidã¯å‡ºåŠ›ã®æŒ‡å®š
 
 		switch($this.level){
 		3{
@@ -826,8 +827,6 @@ class from_Timer_alarm{
 class from_Watched{ 
 
 	[int[]] $IMG= $IMG
-	[array] $Color= $Color
-	[array] $Colour= $Colour
 	[array] $elp= $elapsed[0]
 	[array] $alm= $elapsed[1]
 
@@ -848,12 +847,16 @@ class from_Watched{
 		$this.IMG[0]= $nn
 	}
 
-	Start(){ # ƒƒ\ƒbƒh
+	Start(){ # ãƒ¡ã‚½ãƒƒãƒ‰
 		$this.Tmr.Start()
 	}
 
 	Stop(){
 		$this.Tmr.Stop()
+	}
+
+	Reset(){
+		$this.Tmr.Start()
 	}
 
 	[void] Timer(){
@@ -935,12 +938,12 @@ class from_Watched{
 
 
 		if($this.Timer_alarm.level -ne 0){
-			$this.elp[5]= 360/ 1000* $now[3]	# ‰ñ“]ü‚è
+			$this.elp[5]= 360/ 1000* $now[3]	# å›è»¢é£¾ã‚Š
 		}else{
 			$this.elp[5]= 360/ 60* $now[2]+ 6/ 1000* $now[3]
 		}
 
-		DrawTime $this.elp $now $this.alm $this.color $this.colour
+		DrawTime $this.elp $now $this.alm
 
 	}
  } #class
@@ -948,8 +951,6 @@ class from_Watched{
 class from_StopWatched{ 
 
 	[int[]] $IMG= $IMG
-	[array] $Color= $Color
-	[array] $Colour= $Colour
 	[float[]] $elp= $elapsed[0]
 
 	[object] $Timer_alarm= $Timer_alarm
@@ -970,7 +971,7 @@ class from_StopWatched{
 		$this.IMG[0]= $nn
 	}
 
-	Start(){ # ƒƒ\ƒbƒh
+	Start(){ # ãƒ¡ã‚½ãƒƒãƒ‰
 		$this.tmr.Start()
 		$this.swh.Start()
 	}
@@ -1025,15 +1026,13 @@ class from_StopWatched{
 			$this.elp[5]= 360/ 60* $now[2]+ 360/ 60/ 1000* $now[3]
 		}
 
-		DrawStopWatch $this.elp $now $now $this.color $this.colour
+		DrawStopWatch $this.elp $now $now
 	}
  } #class
  
 class from_Timered{ 
 
 	[int[]] $IMG= $IMG
-	[array] $Color= $Color
-	[array] $Colour= $Colour
 	[float[]] $elp= $elapsed[0]
 
 	[object] $Timer_alarm= $Timer_alarm
@@ -1056,7 +1055,7 @@ class from_Timered{
 		$this.IMG[0]= $nn
 	}
 
-	Start(){ # ƒƒ\ƒbƒh
+	Start(){ # ãƒ¡ã‚½ãƒƒãƒ‰
 		$this.tmr.Start()
 		$this.swh.Start()
 	}
@@ -1127,15 +1126,13 @@ write-host "check3"
 			$this.elp[5]= 360/ 60* $now[2]+ 360/ 60/ 1000* $now[3]
 		}
 
-		DrawStopWatch $this.elp $now $now $this.color $this.colour
+		DrawStopWatch $this.elp $now $now
 	}
  } #class
  
 class from_Watched_gimmick{ 
 
 	[int[]] $IMG= $IMG
-	[array] $Color= $Color
-	[array] $Colour= $Colour
 	[int] $milsec= $milsec
 
 	[float[]] $elap= $elapsed[0]
@@ -1156,7 +1153,7 @@ class from_Watched_gimmick{
 		$this.IMG[0]= $nn
 	}
 
-	Start(){ # ƒƒ\ƒbƒh
+	Start(){ # ãƒ¡ã‚½ãƒƒãƒ‰
 		$this.Tmr.Start()
 		$this.swh.Start()
 	}
@@ -1213,7 +1210,7 @@ class from_Watched_gimmick{
 
  if($this.mode_change[0] -eq "Watched" -and $this.mode_change[1] -eq "Watched"){
 	$real[2]+= $this.IMG[0]
-	$real[5]-= 360
+	$real[5]-= 360 # rev
  }else{
 	if($real[2] -le $this.elap[2]){
 		$real[2]+= $this.IMG[0]
@@ -1228,7 +1225,7 @@ class from_Watched_gimmick{
 			if($elp[2] -ge $real[2]){ $elp[2]= $real[2] }
 
  if($this.mode_change[0] -eq "Watched" -and $this.mode_change[1] -eq "Watched"){
-	if($elp[5] -le $real[5]){ $elp[5]= $real[5] }
+	if($elp[5] -le $real[5]){ $elp[5]= $real[5] } # rev
  }else{
 	if($elp[5] -ge $real[5]){ $elp[5]= $real[5] }
  }
@@ -1238,15 +1235,15 @@ class from_Watched_gimmick{
 			# write-host ("thisIMG:"+ $this.IMG[0])
 
 			[string[]]$now= 0,0,0, 0,0,0
-			$now[0]= [Math]::Floor(600/ $this.IMG[0]* $elp[0]/ 50)% 12 # 600‚ÍŒÅ’è’l
+			$now[0]= [Math]::Floor(600/ $this.IMG[0]* $elp[0]/ 50)% 12 # 600ã¯å›ºå®šå€¤
 			$now[1]= [Math]::Floor(600/ $this.IMG[0]* $elp[1]/ 10)% 60
 			$now[2]= [Math]::Floor(600/ $this.IMG[0]* $elp[2]/ 10)% 60
 
 			switch($this.mode_change[0]){ # wth -> wth / stopwth -> wth
 			'Watched'{
-				DrawTime $elp $now $now $this.color $this.colour
+				DrawTime $elp $now $now
 			}default{
-				DrawStopWatch $elp $now $now $this.color $this.colour
+				DrawStopWatch $elp $now $now
 			}
 			} #sw
 		}
@@ -1256,8 +1253,6 @@ class from_Watched_gimmick{
 class from_StopWatched_gimmick{ 
 
 	[int[]] $IMG= $IMG
-	[array] $Color= $Color
-	[array] $Colour= $Colour
 	[int] $milsec= $milsec
 
 	[float[]] $elap= $elapsed[0]
@@ -1278,7 +1273,7 @@ class from_StopWatched_gimmick{
 		$this.IMG= $nn
 	}
 
-	Start(){ # ƒƒ\ƒbƒh
+	Start(){ # ãƒ¡ã‚½ãƒƒãƒ‰
 		$this.tmr.Start()
 		$this.swh.Start()
 	}
@@ -1333,7 +1328,7 @@ class from_StopWatched_gimmick{
 			$real[2]= [Math]::Floor($this.IMG[0]/ 60* $now[2]+ $this.IMG[0]/ 60/ 1000* $now[3])
 			$real[5]= 360/ 60* $now[2]+ 360/ 60/ 1000* $now[3]
 
-			if($real[0] -le $this.elap[0]){ $real[0]+= $this.IMG[0] } # 1cycle’Ç‰Á
+			if($real[0] -le $this.elap[0]){ $real[0]+= $this.IMG[0] } # 1cycleè¿½åŠ 
 			if($real[1] -le $this.elap[1]){ $real[1]+= $this.IMG[0] }
 			if($real[2] -le $this.elap[2]){ $real[2]+= $this.IMG[0] }
 			if($real[5] -le $this.elap[5]){ $real[5]+= 360 }
@@ -1351,9 +1346,9 @@ class from_StopWatched_gimmick{
 
 			switch($this.mode_change[0]){
 			'Watched'{
-				DrawTime $elp $now $now $this.color $this.colour
+				DrawTime $elp $now $now
 			}default{
-				DrawStopWatch $elp $now $now $this.color $this.colour
+				DrawStopWatch $elp $now $now
 			}
 			} #sw
 		}
@@ -1438,7 +1433,7 @@ class from_Timered{
 		$this.IMG[0]= $nn
 	}
 
-	Start(){ # ƒƒ\ƒbƒh
+	Start(){ # ãƒ¡ã‚½ãƒƒãƒ‰
 		$this.swh.Start()
 	}
 
@@ -1630,8 +1625,8 @@ class from_DrawTime{
 
 	Render(){
 
-		$script:buff.Render($graphics) # ƒŒƒ“ƒ_ƒŠƒ“ƒO
-@		$script:Pictbox.Refresh()
+		$script:buff.Render($graphics) # ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
+ã€€		$script:Pictbox.Refresh()
 	}
 
  } #class
@@ -1763,8 +1758,8 @@ class from_DrawStopWatch{
 	$buff.Graphics.DrawString($now[2], $Fona, $Second_brush, $pos[0],$pos[1])
 
 
-@@$buff.Render($graphics) # ƒŒƒ“ƒ_ƒŠƒ“ƒO
-@@$Pictbox.Refresh()
+ã€€ã€€$buff.Render($graphics) # ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
+ã€€ã€€$Pictbox.Refresh()
 
  } #func
  
@@ -1991,7 +1986,7 @@ Function Watched(){
 
 
 	if($Timer_alarm.level -ne 0){
-		$elapsed[0][5]= 360/ 1000* $nowtime[3]	# ü‚è
+		$elapsed[0][5]= 360/ 1000* $nowtime[3]	# é£¾ã‚Š
 	}else{
 		$elapsed[0][5]= 360/ 60* $nowtime[2]+ 6/ 1000* $nowtime[3]
 	}
@@ -2030,7 +2025,7 @@ Function Mode(){
  
 function StopWatch_gimmick(){ 
 
-	if($Stopwth.ElapsedMilliseconds -ge ($milsec+ $milsec/60)){ # $milsec/60 111.67%‚Ü‚Å
+	if($Stopwth.ElapsedMilliseconds -ge ($milsec+ $milsec/60)){ # $milsec/60 111.67%ã¾ã§
 
 		$Tmr.Interval= 64
 		## $Tmr.Stop()
@@ -2280,7 +2275,7 @@ function DIApos([float]$num, [float]$width, [float]$height){
 	[float[]]$rad= 0,0,0
 
 	$rad[0]= ($num+ $width)* $pi* 2/ $IMG[0]
-	$rad[1]= $num* $pi* 2/ $IMG[0]		# ‘SˆÊ‘ŠŠp‚ğxÀ•W‚ÌÅ‘å’l‚ÅŠ„‚Á‚Ä‚¨‚­
+	$rad[1]= $num* $pi* 2/ $IMG[0]		# å…¨ä½ç›¸è§’ã‚’xåº§æ¨™ã®æœ€å¤§å€¤ã§å‰²ã£ã¦ãŠã
 	$rad[2]= ($num- $width)* $pi* 2/ $IMG[0]
 
 	[float[]]$fx= 0,0,0, 0,0
@@ -2374,11 +2369,11 @@ function Plate($color){
 
 
 	$buff.Graphics.Clear($black)
-@@# $buff.Graphics.DrawLine($white_pen, $center[0],($IMG[1]* 0.2), $center[0],($IMG[1]* 0.8))
-@@# $buff.Graphics.DrawLine($white_pen, ($IMG[0]*0.2),$center[1], ($IMG[0]*0.8),$center[1])
+ã€€ã€€# $buff.Graphics.DrawLine($white_pen, $center[0],($IMG[1]* 0.2), $center[0],($IMG[1]* 0.8))
+ã€€ã€€# $buff.Graphics.DrawLine($white_pen, ($IMG[0]*0.2),$center[1], ($IMG[0]*0.8),$center[1])
 
-@@DIApos ($IMG[0]/ 4) 0.004 0.67
-@@$buff.Graphics.FillPolygon($Millisecond_brush, $pointed[1])
+ã€€ã€€DIApos ($IMG[0]/ 4) 0.004 0.67
+ã€€ã€€$buff.Graphics.FillPolygon($Millisecond_brush, $pointed[1])
 
 	# [array]$posa= STRpos ($IMG[0]/ 12* 0) ($IMG[0]/ 4) 0.74
 	# [array]$posb= STRpos ($IMG[0]/ 12* 6) ($IMG[0]/ 4) 0.74
@@ -2409,7 +2404,7 @@ $baloon.ShowAlways= $False
 $baloon.ToolTipTitle= 'Alarm: '
 $baloon.AutomaticDelay= 667
  
-[int[]]$ALM= @(($IMG[0]* 0.3+ 2), ($IMG[0]* 0.03+ 2)) # ƒAƒ‰[ƒ€ƒTƒCƒY 
+[int[]]$ALM= @(($IMG[0]* 0.3+ 2), ($IMG[0]* 0.03+ 2)) # ã‚¢ãƒ©ãƒ¼ãƒ ã‚µã‚¤ã‚º 
 [int[]]$buff_alm= @(($ALM[0]+ 2), ($ALM[1]+ 2))
 
 $alarm0image= New-Object System.Drawing.Bitmap($ALM)
@@ -2419,11 +2414,11 @@ $alarm0graphics= [System.Drawing.Graphics]::FromImage($alarm0image)
 $alarm1graphics= [System.Drawing.Graphics]::FromImage($alarm1image)
 $alarm2graphics= [System.Drawing.Graphics]::FromImage($alarm2image)
 
-$Pica= New-Object System.Windows.Forms.PictureBox # •`‰æ—Ìˆæ
+$Pica= New-Object System.Windows.Forms.PictureBox # æç”»é ˜åŸŸ
 $Pica.ClientSize= $alarm0image.Size
 $Pica.Image= $alarm0image
 $Pica.Location= @(-10, 10) -join ","
-$Pica.Parent= $Pictbox # .AddRange‚Æ‚È‚é
+$Pica.Parent= $Pictbox # .AddRangeã¨ãªã‚‹
 $Pica.BackColor= $trans
 
 $Picb= New-Object System.Windows.Forms.PictureBox
@@ -2456,13 +2451,13 @@ $Picc.Parent= $Pictbox
 $Picc.BackColor= $trans
 
 
-$contxta= [System.Drawing.BufferedGraphicsManager]::Current # ƒ_ƒuƒ‹ƒoƒbƒtƒ@
-$contxta.MaximumBuffer= @($buff_alm[0],$buff_alm[1]) -join "," # stringo—Í
+$contxta= [System.Drawing.BufferedGraphicsManager]::Current # ãƒ€ãƒ–ãƒ«ãƒãƒƒãƒ•ã‚¡
+$contxta.MaximumBuffer= @($buff_alm[0],$buff_alm[1]) -join "," # stringå‡ºåŠ›
 $buffa= $contxta.Allocate($alarm1graphics, $Picb.ClientRectangle)
  
  ------------ #> 
   
-[double]$pi= [Math]::PI # 180“x‚Ìƒ‰ƒWƒAƒ“’l 
+[double]$pi= [Math]::PI # 180åº¦ã®ãƒ©ã‚¸ã‚¢ãƒ³å€¤ 
 
 
 [array]$pointed= "","" # hari, dia
@@ -2507,10 +2502,10 @@ $pointed[0]= Reso 9 # point obj
 #  })
  
 # [string[]]$sound_path= "","","", "","","" 
-# $sound_path[0]= "C:\data\XP HD 22 3 28\ƒf[ƒ^\ƒGƒ€ƒs[ƒXƒŠ[\All\Electronica\tATu\01-ƒI[ƒ‹ƒUƒVƒ“ƒOƒXƒV[ƒZƒbƒh(ƒ‰ƒWƒIƒ”ƒ@[ƒWƒ‡ƒ“).wav"
-# $sound_path[1]= "C:\data\XP HD 22 3 28\ƒf[ƒ^\ƒGƒ€ƒs[ƒXƒŠ[\All\Electronica\tATu\01-ƒI[ƒ‹ƒUƒVƒ“ƒOƒXƒV[ƒZƒbƒh(ƒ‰ƒWƒIƒ”ƒ@[ƒWƒ‡ƒ“).wav"
-# $sound_path[2]= "C:\data\XP HD 22 3 28\ƒf[ƒ^\ƒGƒ€ƒs[ƒXƒŠ[\All\Electronica\tATu\01-ƒI[ƒ‹ƒUƒVƒ“ƒOƒXƒV[ƒZƒbƒh(ƒ‰ƒWƒIƒ”ƒ@[ƒWƒ‡ƒ“).wav"
-# $sound_path[3]= "C:\data\XP HD 22 3 28\ƒf[ƒ^\ƒGƒ€ƒs[ƒXƒŠ[\All\Electronica\tATu\01-ƒI[ƒ‹ƒUƒVƒ“ƒOƒXƒV[ƒZƒbƒh(ƒ‰ƒWƒIƒ”ƒ@[ƒWƒ‡ƒ“).wav"
+# $sound_path[0]= "C:\data\XP HD 22 3 28\ãƒ‡ãƒ¼ã‚¿\ã‚¨ãƒ ãƒ”ãƒ¼ã‚¹ãƒªãƒ¼\All\Electronica\tATu\01-ã‚ªãƒ¼ãƒ«ã‚¶ã‚·ãƒ³ã‚°ã‚¹ã‚·ãƒ¼ã‚»ãƒƒãƒ‰(ãƒ©ã‚¸ã‚ªãƒ´ã‚¡ãƒ¼ã‚¸ãƒ§ãƒ³).wav"
+# $sound_path[1]= "C:\data\XP HD 22 3 28\ãƒ‡ãƒ¼ã‚¿\ã‚¨ãƒ ãƒ”ãƒ¼ã‚¹ãƒªãƒ¼\All\Electronica\tATu\01-ã‚ªãƒ¼ãƒ«ã‚¶ã‚·ãƒ³ã‚°ã‚¹ã‚·ãƒ¼ã‚»ãƒƒãƒ‰(ãƒ©ã‚¸ã‚ªãƒ´ã‚¡ãƒ¼ã‚¸ãƒ§ãƒ³).wav"
+# $sound_path[2]= "C:\data\XP HD 22 3 28\ãƒ‡ãƒ¼ã‚¿\ã‚¨ãƒ ãƒ”ãƒ¼ã‚¹ãƒªãƒ¼\All\Electronica\tATu\01-ã‚ªãƒ¼ãƒ«ã‚¶ã‚·ãƒ³ã‚°ã‚¹ã‚·ãƒ¼ã‚»ãƒƒãƒ‰(ãƒ©ã‚¸ã‚ªãƒ´ã‚¡ãƒ¼ã‚¸ãƒ§ãƒ³).wav"
+# $sound_path[3]= "C:\data\XP HD 22 3 28\ãƒ‡ãƒ¼ã‚¿\ã‚¨ãƒ ãƒ”ãƒ¼ã‚¹ãƒªãƒ¼\All\Electronica\tATu\01-ã‚ªãƒ¼ãƒ«ã‚¶ã‚·ãƒ³ã‚°ã‚¹ã‚·ãƒ¼ã‚»ãƒƒãƒ‰(ãƒ©ã‚¸ã‚ªãƒ´ã‚¡ãƒ¼ã‚¸ãƒ§ãƒ³).wav"
 # $sound_path[4]= "C:\Windows\Media\Windows Foreground.wav"
 # $sound_path[5]= "C:\Windows\Media\Windows Background.wav"
 
@@ -2522,7 +2517,7 @@ $pointed[0]= Reso 9 # point obj
 # $Playshort= New-Object System.Media.SoundPlayer
 # $Playshort.SoundLocation= ""
  
-# Fw’èAFƒIƒuƒWƒFƒNƒg 
+# è‰²æŒ‡å®šã€è‰²ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ 
 	
 # $purple= [System.Drawing.Color]::FromName("blueviolet") 
 # $magenta= [System.Drawing.Color]::FromName("orchid")
@@ -2533,7 +2528,7 @@ $pointed[0]= Reso 9 # point obj
 # $blue= [System.Drawing.Color]::FromName("blue")
 # $aqua= [System.Drawing.Color]::FromName("turquoise")
  
-# $trans= [System.Drawing.Color]::FromName($transparent)	# “§–¾F 
+# $trans= [System.Drawing.Color]::FromName($transparent)	# é€æ˜è‰² 
 # $trans_brush= New-Object System.Drawing.SolidBrush($trans)
 
 # $gray= [System.Drawing.Color]::FromArgb(166,60,60,60)
@@ -2543,10 +2538,10 @@ $pointed[0]= Reso 9 # point obj
 # $gray_pen= New-Object System.Drawing.Pen($gray, 2)
 # $blue_pen= New-Object System.Drawing.Pen($blue, 2)
  
-$black= [System.Drawing.Color]::FromArgb(248,24,39,61) # 59,71)	# ˆÃ•F‰ü A‚Í‚‹‰Š´ 236,34,62,68 
+$black= [System.Drawing.Color]::FromArgb(248,24,39,61) # 59,71)	# æš—é»’è‰²æ”¹ Aã¯é«˜ç´šæ„Ÿ 236,34,62,68 
 $black_brush= New-Object System.Drawing.SolidBrush($black)
 
-$white= [System.Drawing.Color]::FromArgb(255,251,250,245)	# ¶¬‚èF A:254
+$white= [System.Drawing.Color]::FromArgb(255,251,250,245)	# ç”Ÿæˆã‚Šè‰² A:254
 $white_brush= New-Object System.Drawing.SolidBrush($white)
 $white_pen= New-Object System.Drawing.Pen($white, 1)
 
@@ -2562,6 +2557,7 @@ $Millisecond_pen= New-Object System.Drawing.Pen($rgb, 1)
 $rr= [System.Drawing.Color]::FromArgb(150,250,50,50)
 $gb= [System.Drawing.Color]::FromArgb(150,50,250,250)
 $rb= [System.Drawing.Color]::FromArgb(150,250,50,250)
+
 # $rg= [System.Drawing.Color]::FromArgb(150,250,250,50)
 # $gg= [System.Drawing.Color]::FromArgb(250,50,250,50)
 
@@ -2575,9 +2571,9 @@ $Second_pen= New-Object System.Drawing.Pen($rb, 1)
 
  
 # second 
-$rr1= [System.Drawing.Color]::FromArgb(150,50,250,50)
-$gb1= [System.Drawing.Color]::FromArgb(150,250,50,250)
-$rb1= [System.Drawing.Color]::FromArgb(150,250,250,50)
+$rr1= [System.Drawing.Color]::FromArgb(150,50,50,250)
+$gb1= [System.Drawing.Color]::FromArgb(150,250,250,50)
+$rb1= [System.Drawing.Color]::FromArgb(150,50,250,250)
 
 $Hour_brush1= New-Object System.Drawing.SolidBrush($rr1)
 $Minute_brush1= New-Object System.Drawing.SolidBrush($gb1)
@@ -2589,9 +2585,9 @@ $Second_pen1= New-Object System.Drawing.Pen($rb1, 1)
 
  
 # third 
-$rr2= [System.Drawing.Color]::FromArgb(150,50,50,250)
-$gb2= [System.Drawing.Color]::FromArgb(150,250,250,50)
-$rb2= [System.Drawing.Color]::FromArgb(150,50,250,250)
+$rr2= [System.Drawing.Color]::FromArgb(150,50,250,50)
+$gb2= [System.Drawing.Color]::FromArgb(150,250,50,250)
+$rb2= [System.Drawing.Color]::FromArgb(150,250,250,50)
 
 $Hour_brush2= New-Object System.Drawing.SolidBrush($rr2)
 $Minute_brush2= New-Object System.Drawing.SolidBrush($gb2)
@@ -2601,14 +2597,14 @@ $Hour_pen2= New-Object System.Drawing.Pen($rr2, 1)
 $Minute_pen2= New-Object System.Drawing.Pen($gb2, 1)
 $Second_pen2= New-Object System.Drawing.Pen($rb2, 1)
   
-# ƒOƒ‰ƒtƒBƒbƒNƒX—Ìˆæ‚ÌŠm•Û 
-	 
-[int[]]$IMG= @(600, 600) # ƒOƒ‰ƒt‚ÌƒTƒCƒY 
+# ã‚°ãƒ©ãƒ•ã‚£ãƒƒã‚¯ã‚¹é ˜åŸŸã®ç¢ºä¿ 
+	
+[int[]]$IMG= @(600, 600) # ã‚°ãƒ©ãƒ•ã®ã‚µã‚¤ã‚º 
 [int[]]$buff_size= @(($IMG[0]+ 2), ($IMG[1]+ 2))
-[int[]]$center= (($buff_size[0]/ 2), ($buff_size[1]/ 2)) # ƒZƒ“ƒ^[
+[int[]]$center= (($buff_size[0]/ 2), ($buff_size[1]/ 2)) # ã‚»ãƒ³ã‚¿ãƒ¼
 
  
-$image= New-Object System.Drawing.Bitmap($IMG) # ‘‚«‚ŞêŠ 
+$image= New-Object System.Drawing.Bitmap($IMG) # æ›¸ãè¾¼ã‚€å ´æ‰€ 
 
 # $image5= New-Object System.Drawing.Bitmap(162,102)
 # $gpk= [System.Drawing.Graphics]::FromImage($image5)
@@ -2617,7 +2613,7 @@ $graphics= [System.Drawing.Graphics]::FromImage($image)
 $graphics.CompositingQuality= "HighQuality"
 $graphics.SmoothingMode= "HighQuality"
 
-$Pictbox= New-Object System.Windows.Forms.PictureBox # •`‰æ—Ìˆæ
+$Pictbox= New-Object System.Windows.Forms.PictureBox # æç”»é ˜åŸŸ
 $Pictbox.ClientSize= $image.Size
 $Pictbox.Image= $image
 $Pictbox.Location= @(-10, 15) -join ","
@@ -2640,8 +2636,8 @@ $Pictbox.Add_MouseDown({
  }
  })
 
-$contxtb= [System.Drawing.BufferedGraphicsManager]::Current # ƒ_ƒuƒ‹ƒoƒbƒtƒ@
-$contxtb.MaximumBuffer= @($buff_size[0],$buff_size[1]) -join "," # stringo—Í
+$contxtb= [System.Drawing.BufferedGraphicsManager]::Current # ãƒ€ãƒ–ãƒ«ãƒãƒƒãƒ•ã‚¡
+$contxtb.MaximumBuffer= @($buff_size[0],$buff_size[1]) -join "," # stringå‡ºåŠ›
 $buff= $contxtb.Allocate($graphics, $Pictbox.ClientRectangle)
  
 $slide_image= New-Object System.Drawing.Bitmap($IMG[0], [Math]::Floor($IMG[1]/ 3)) 
@@ -2658,7 +2654,7 @@ $contxt_slide= [System.Drawing.BufferedGraphicsManager]::Current
 $contxt_slide.MaximumBuffer= @($buff_size[0],$buff_size[1]) -join ","
 $buff_slide= $contxt_slide.Allocate($slide_graphics, $slide_Pictbox.ClientRectangle)
   
-# ƒCƒxƒ“ƒg“o˜^ ------ 
+# ã‚¤ãƒ™ãƒ³ãƒˆç™»éŒ² ------ 
 
 # $Mode.Watched.Timer_alarm.tmr.Add_Tick({ $Watched.Timer_alarm.Timer() })
 # $Mode.Watched.Short_signal.tmr.Add_Tick({ $Watched.Short_signal.Timer() })
@@ -2675,10 +2671,10 @@ $Fona= New-Object System.Drawing.Font("Georgia",(($IMG[0]+ $IMG[1])* 0.05/ 2)) #
 $Fonb= New-Object System.Drawing.Font("Verdana",(($IMG[0]+ $IMG[1])* 0.03/ 2)) # Lucida Console  Garamond  Georgia  Impact
  
 $dia= New-Object System.Windows.Forms.OpenFileDialog 
-# ƒtƒ@ƒCƒ‹‘I‘ğƒ_ƒCƒAƒƒO
+# ãƒ•ã‚¡ã‚¤ãƒ«é¸æŠãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
-$dia.Filter= "wav files (*.wav)|*.wav" # space‚ğ“ü‚ê‚È‚¢‚±‚Æ!
-$dia.Title= "ƒtƒ@ƒCƒ‹–¼‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢"
+$dia.Filter= "wav files (*.wav)|*.wav" # spaceã‚’å…¥ã‚Œãªã„ã“ã¨!
+$dia.Title= "ãƒ•ã‚¡ã‚¤ãƒ«åã‚’å…¥åŠ›ã—ã¦ãã ã•ã„"
 $dia.RestoreDirectory= "True"
 
 # $dia.FileName
@@ -2687,8 +2683,8 @@ $dia.RestoreDirectory= "True"
  
 # ------------ 
  
-#ƒRƒ“ƒeƒLƒXƒgƒƒjƒ…[ 
-	 
+#ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆãƒ¡ãƒ‹ãƒ¥ãƒ¼ 
+	
 $menu_c= New-Object System.Windows.Forms.ToolStripMenuItem 
 $menu_c.Text= "ChangeColor"
 	
@@ -2785,12 +2781,12 @@ $contxt.Items.AddRange(@($contxt_size, $menu_c, $contxt_aset))
  
 # ------------ 
  
-# ƒƒjƒ…[ 
-	
+# ãƒ¡ãƒ‹ãƒ¥ãƒ¼ 
+	 
 $menu_f= New-Object System.Windows.Forms.ToolStripMenuItem 
 $menu_f.Text= "Mode"
 
-	
+	 
 $menu_wh= New-Object System.Windows.Forms.ToolStripMenuItem 
 $menu_wh.Text= "Watch"
 $menu_wh.Add_Click({
@@ -2851,7 +2847,7 @@ $menu_f.DropDownItems.AddRange(@($menu_wh,$menu_sw,$menu_tr))
   
 $menu_t= New-Object System.Windows.Forms.ToolStripMenuItem 
 $menu_t.Text= "Time"
-	
+	 
 $menu_start= New-Object System.Windows.Forms.ToolStripMenuItem 
 $menu_start.Text= "Start"
 $menu_start.Add_Click({
@@ -2889,17 +2885,20 @@ $menu_reset= New-Object System.Windows.Forms.ToolStripMenuItem
 $menu_reset.Text= "Reset"
 $menu_reset.Add_Click({
 
-	$script:mode_change[1]= $mode_change[0]
-
-	$Timer_alarm.Stop()
-	$Tmr.Interval= 64
-	$Tmr.Start()
-
-	$Stopwth.Restart() # gimic
-	$script:mode_change[2]= $True
-
+	switch($mode_change[0]){
+	"Watched"{
+		$Watched.Reset()
+		$menu_wh.PerformClick()
+	}"StopWatched"{
+		$StopWatched.Reset()
+		$menu_sw.PerformClick()
+	}"Timered"{
+		$Timered.Reset()
+		$menu_tr.PerformClick()
+	}
+	} #sw
  })
- 
+ 	
 $menu_t.DropDownItems.AddRange(@($menu_start,$menu_stop,$menu_reset)) 
   
 $menu_a= New-Object System.Windows.Forms.ToolStripMenuItem 
@@ -2973,11 +2972,11 @@ $menu_alarmstop.Add_Click({
 $mnu= New-Object System.Windows.Forms.MenuStrip 
 $mnu.Items.AddRange(@($menu_f,$menu_t,$menu_a,$menu_alarmstop))
   
-#ƒtƒH[ƒ€ 
-	 
+#ãƒ•ã‚©ãƒ¼ãƒ  
+	
 $frm= New-Object System.Windows.Forms.Form 
-$frm.Size= @(600, 640) -join "," # stringo—Í
-$frm.MinimumSize= @(200, 240) -join "," # stringo—Í
+$frm.Size= @(600, 640) -join "," # stringå‡ºåŠ›
+$frm.MinimumSize= @(200, 240) -join "," # stringå‡ºåŠ›
 $frm.Text= "Gimmik Clock"
 $frm.FormBorderStyle= "Sizable"
 $frm.StartPosition= "WindowsDefaultLocation"
@@ -2995,6 +2994,12 @@ $frm.Add_Load({
  
 [array] $sizer= $frm.Width,$frm.Height,"width" 
  
+$frm.Add_SizeChanged({ 
+	$Pictbox.SuspendLayout()
+	Resize_Set
+	$Pictbox.ResumeLayout()
+ })
+ 
 $frm.Add_ResizeEnd({ 
 	if($frm.Width -ne $sizer[0]){
 		$script:sizer[2]= "width"
@@ -3005,29 +3010,23 @@ $frm.Add_ResizeEnd({
 
 	switch($sizer[2]){
 	'height'{
-		$frm.Height= $frm.Width+ 40
-	}'width'{
 		$frm.Width= $frm.Height- 40
+	}'width'{
+		$frm.Height= $frm.Width+ 40
 	}
 	} #sw
 	$script:sizer= $frm.Width, $frm.Height, $sizer[2]
- })
- 	
-$frm.Add_SizeChanged({ 
-	$Pictbox.SuspendLayout()
-	Resize_Set
-	$Pictbox.ResumeLayout()
  })
  
 <# 
  
 #> 
  
-$frm.Controls.AddRange(@($mnu,$slide_Pictbox,$Pictbox)) #‰º‚ÍŒã‚ë‘¤ 
+$frm.Controls.AddRange(@($mnu,$slide_Pictbox,$Pictbox)) #ä¸‹ã¯å¾Œã‚å´ 
   
 $cpostion= New-Object System.Drawing.Point 
  
-# ƒƒCƒ“ƒ‹[ƒ`ƒ“ ====== 
+# ãƒ¡ã‚¤ãƒ³ãƒ«ãƒ¼ãƒãƒ³ ====== 
 
 [array]$Color= @($Hour_brush, $Minute_brush, $Second_brush)
 [array]$Colour= @($Hour_pen, $Minute_pen, $Second_pen)
