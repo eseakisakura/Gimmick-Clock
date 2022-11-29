@@ -1,7 +1,7 @@
-﻿# 立方体の固定値へ 
+﻿# 関数の静的メソッド化 
+
+# 立方体の固定値へ
 # 900px以上のスライド対応
-
-
 
 #  stopwatch gimmik で0のち、マイナス値が表示される
 # Ellipse_pos([bool]$sw)の問題
@@ -475,7 +475,7 @@ function DrawTime([float[]]$elp, [string[]]$now, [float[]]$alm){
 
 		[float[]]$ff= Ellipse_pos $alm[0] 0.03 0.9 $mode_change[2]
 
-		if([Math]::Floor($date.Hour/ 12) -eq [Math]::Floor($Alarm0set.Hours/ 12)){ # am/pm
+		if([Math]::Floor($date.Hour/ 12) -eq [Math]::Floor($AlarmTime[0].Hours/ 12)){ # am/pm
 			$buff.Graphics.FillEllipse($triangle[0], $ff[0],$ff[1], $ff[2],$ff[3])
 		}else{
 			$buff.Graphics.DrawEllipse($cercle[0], $ff[0],$ff[1], $ff[2],$ff[3])
@@ -496,7 +496,7 @@ function DrawTime([float[]]$elp, [string[]]$now, [float[]]$alm){
 
 		[float[]]$ff= Ellipse_pos $alm[1] 0.03 0.9 $mode_change[2]
 
-		if([Math]::Floor($date.Hour/ 12) -eq [Math]::Floor($Alarm1set.Hours/ 12)){ # am/pm
+		if([Math]::Floor($date.Hour/ 12) -eq [Math]::Floor($AlarmTime[1].Hours/ 12)){ # am/pm
 			$buff.Graphics.FillEllipse($triangle[1], $ff[0],$ff[1], $ff[2],$ff[3])
 		}else{
 			$buff.Graphics.DrawEllipse($cercle[1], $ff[0],$ff[1], $ff[2],$ff[3])
@@ -506,7 +506,8 @@ function DrawTime([float[]]$elp, [string[]]$now, [float[]]$alm){
 
 		[float[]]$ff= Ellipse_pos $alm[2] 0.03 0.9 $mode_change[2]
 
-		if([Math]::Floor($date.Hour/ 12) -eq [Math]::Floor($Alarm2set.Hours/ 12)){ # am/pm
+		if([Math]::Floor($date.Hour/ 12) -eq [Math]::Floor($AlarmTime[2].Hours/ 12)){ # am/pm
+
 			$buff.Graphics.FillEllipse($triangle[2], $ff[0],$ff[1], $ff[2],$ff[3])
 		}else{
 			$buff.Graphics.DrawEllipse($cercle[2], $ff[0],$ff[1], $ff[2],$ff[3])
@@ -576,7 +577,7 @@ function DrawTime([float[]]$elp, [string[]]$now, [float[]]$alm){
 	$Pictbox.Refresh()
 
  } #func
-  
+ 	 
 # class 
 	 
 class from_Swipe{ 
@@ -2782,11 +2783,11 @@ $contxt.Items.AddRange(@($contxt_size, $menu_c, $contxt_aset))
 # ------------ 
  
 # メニュー 
-	 
+	
 $menu_f= New-Object System.Windows.Forms.ToolStripMenuItem 
 $menu_f.Text= "Mode"
 
-	 
+	
 $menu_wh= New-Object System.Windows.Forms.ToolStripMenuItem 
 $menu_wh.Text= "Watch"
 $menu_wh.Add_Click({
@@ -2847,7 +2848,7 @@ $menu_f.DropDownItems.AddRange(@($menu_wh,$menu_sw,$menu_tr))
   
 $menu_t= New-Object System.Windows.Forms.ToolStripMenuItem 
 $menu_t.Text= "Time"
-	 
+	
 $menu_start= New-Object System.Windows.Forms.ToolStripMenuItem 
 $menu_start.Text= "Start"
 $menu_start.Add_Click({
@@ -2898,7 +2899,7 @@ $menu_reset.Add_Click({
 	}
 	} #sw
  })
- 	
+ 
 $menu_t.DropDownItems.AddRange(@($menu_start,$menu_stop,$menu_reset)) 
   
 $menu_a= New-Object System.Windows.Forms.ToolStripMenuItem 
