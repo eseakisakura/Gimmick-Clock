@@ -1,10 +1,10 @@
 ﻿<h1>Gimmick-Clock - Bata版</h1>
- <a href="./LICENSE">
-<img alt="License Badge" src="https://img.shields.io/badge/license-Apache%202-blue">
-</a>
 <div>
  ギミック機構付きのアナログ時計です。<br>
 </div>
+ <a href="./LICENSE">
+<img alt="GitHub" src="https://img.shields.io/github/license/eseakisakura/Gimmick-Clock">
+</a>
 <br>
 <table><tr><td>
 <img src="./image/Gimmik_Clock .png">
