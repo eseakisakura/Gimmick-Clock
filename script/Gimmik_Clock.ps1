@@ -13,7 +13,7 @@ cd (Split-Path -Parent $MyInvocation.MyCommand.Path)
 [Environment]::CurrentDirectory= pwd # working_dir set
  
 # function 
-	
+	 
 function Recolor_Set([int]$nn){ 
 
 	switch($nn){
@@ -114,12 +114,12 @@ function Ellipse_pos([float]$num, [float]$width, [float]$height, [bool]$sw){
  
 # ------------ 
  
-function XYinput([array]$rr, [int]$num){ 
+function XYinput([array] $rr ){ 
 
 	For([int]$i= 0; $i -lt $rr[0].Length; $i++){
 
-		$script:pointed[$num][$i].X= $rr[0][$i]
-		$script:pointed[$num][$i].Y= $rr[1][$i]
+		$script:pointed[$i].X= $rr[0][$i]
+		$script:pointed[$i].Y= $rr[1][$i]
 	} #
  } $func
  
@@ -185,7 +185,7 @@ function XYpos([float]$num, [float]$width, [float]$height){
 	$gy[8]= $center[1]
 
 	[array]$xy= $gx, $gy
-	XYinput $xy 0
+	XYinput $xy
 
  } #func
  
@@ -299,16 +299,18 @@ function Chg_Moder([string]$sw, [string]$md){
 	switch($sw){
 	'Start'{
 		switch($md){
-		'Watched'{	$Watched.tmr.Start();	break;
+		'Watched'{
+				$Watched.Start();	break;
 		}'StopWatched'{	$StopWatched.Load()
 				$StopWatched.tmr.Start();	break;
 		}'Timered'{	$Timered.Load()
 				$Timered.tmr.Start()
 		}
 		} #sw
+		break;
 	}'Stop'{
 		switch($md){
-		'Watched'{	$Watched.tmr.Stop();	break;
+		'Watched'{	$Watched.Stop();	break;
 		}'StopWatched'{	$StopWatched.tmr.Stop();	break;
 		}'Timered'{	$Timered.tmr.Stop()
 		}
@@ -426,7 +428,7 @@ function DrawStopWatch([float[]]$elp, [string[]]$now, [float[]]$alm){
 # ----- $hour
 
 	XYpos $elp[0] 0.036 0.6
-	$buff.Graphics.FillPolygon($triangle[0], $pointed[0])
+	$buff.Graphics.FillPolygon($triangle[0], $script:pointed)
 
 	[array]$pos= STRpos $elp[0] -10 0.4
 	$buff.Graphics.DrawString(($now[0]% 12), $Fona, $triangle[0], $pos[0],$pos[1])
@@ -434,7 +436,7 @@ function DrawStopWatch([float[]]$elp, [string[]]$now, [float[]]$alm){
 # ----- $min
 
 	XYpos $elp[1] 0.018 0.8
-	$buff.Graphics.FillPolygon($triangle[1], $pointed[0])
+	$buff.Graphics.FillPolygon($triangle[1], $script:pointed)
 
 	[array]$pos= STRpos $elp[1] -10 0.5
 	$buff.Graphics.DrawString($now[1], $Fona, $triangle[1], $pos[0],$pos[1])
@@ -442,7 +444,7 @@ function DrawStopWatch([float[]]$elp, [string[]]$now, [float[]]$alm){
 # ----- $sec
 
 	XYpos $elp[2] 0.009 0.9
-	$buff.Graphics.FillPolygon($triangle[2], $pointed[0])
+	$buff.Graphics.FillPolygon($triangle[2], $script:pointed)
 
 	[array]$pos= STRpos $elp[2] -10 0.6
 	$buff.Graphics.DrawString($now[2], $Fona, $triangle[2], $pos[0],$pos[1])
@@ -458,11 +460,11 @@ function DrawTime([float[]]$elp, [string[]]$now, [float[]]$alm){
 	[array]$triangle=  $script:Color
 	[array]$cercle= $script:Colour
 
-	[array]$AlarmTime= $Watched.AlarmTime
 	[array]$setalarm= $Watched.setalarm
+	[array]$AlarmTime= $Watched.AlarmTime
 
 	[array]$mode_change= $script:mode_change
-
+$mode_change[2]= $False
 # ----- $milsec
 
 	$buff.Graphics.Clear($black)
@@ -568,13 +570,13 @@ function DrawTime([float[]]$elp, [string[]]$now, [float[]]$alm){
 ## ----- $pend
 
 	## XYpos $elp[4] 0.060 0.4
-	## $buff.Graphics.FillPolygon($frame_brush, $pointed[0])
+	## $buff.Graphics.FillPolygon($frame_brush, $pointed[1])
 
 
 # ----- $hour
 
 	XYpos $elp[0] 0.036 0.6
-	$buff.Graphics.FillPolygon($triangle[0], $pointed[0])
+	$buff.Graphics.FillPolygon($triangle[0], $script:pointed)
 
 	[int[]]$num= 12,1,2,3,4,5,6,7,8,9,10,11
 
@@ -584,7 +586,7 @@ function DrawTime([float[]]$elp, [string[]]$now, [float[]]$alm){
 # ----- $min
 
 	XYpos $elp[1] 0.018 0.8
-	$buff.Graphics.FillPolygon($triangle[1], $pointed[0])
+	$buff.Graphics.FillPolygon($triangle[1], $script:pointed)
 
 	[array]$pos= STRpos $elp[1] -10 0.5
 	$buff.Graphics.DrawString($now[1], $Fona, $triangle[1], $pos[0],$pos[1])
@@ -592,7 +594,7 @@ function DrawTime([float[]]$elp, [string[]]$now, [float[]]$alm){
 # ----- $sec
 
 	XYpos $elp[2] 0.009 0.9
-	$buff.Graphics.FillPolygon($triangle[2], $pointed[0])
+	$buff.Graphics.FillPolygon($triangle[2], $script:pointed)
 
 	[array]$pos= STRpos $elp[2] -10 0.6
 	$buff.Graphics.DrawString($now[2], $Fona, $triangle[2], $pos[0],$pos[1])
@@ -605,7 +607,7 @@ function DrawTime([float[]]$elp, [string[]]$now, [float[]]$alm){
  } #func
   
 # class 
-	
+	 
 class from_Swipe{ 
 
 	[int[]]  $Fibonacci_num= 0,1,1,2, 3,5,8,13, 21,34,55,89, 144,233,377,610, 987,1597,2584,4181  #
@@ -864,6 +866,7 @@ class from_Watched{
 	[object] $Timer_alarm= $Timer_alarm
 
 	from_Watched(){
+
 		$this.tmr= New-Object System.Windows.Forms.Timer
 		$this.tmr.Interval= 200
 		$this.tmr.Enabled= $False
@@ -967,9 +970,9 @@ class from_Watched{
 		$script:elapsing[1]= [Math]::Floor($this.IMG[0]/ 60* $now[1]+ $this.IMG[0]/ 60/ 60* $now[2])
 		$script:elapsing[2]= [Math]::Floor($this.IMG[0]/ 60* $now[2])
 
-		$this.alm[0]= [Math]::Floor($this.IMG[0]/ 12* ($this.AlarmTime[0].Hours% 12) + $this.IMG[0]/ 12/ 60* $this.AlarmTime[0].Minutes)
-		$this.alm[1]= [Math]::Floor($this.IMG[0]/ 12* ($this.AlarmTime[1].Hours% 12) + $this.IMG[0]/ 12/ 60* $this.AlarmTime[1].Minutes)
-		$this.alm[2]= [Math]::Floor($this.IMG[0]/ 12* ($this.AlarmTime[2].Hours% 12) + $this.IMG[0]/ 12/ 60* $this.AlarmTime[2].Minutes)
+		$script:alarming[0]= [Math]::Floor($this.IMG[0]/ 12* ($this.AlarmTime[0].Hours% 12) + $this.IMG[0]/ 12/ 60* $this.AlarmTime[0].Minutes)
+		$script:alarming[1]= [Math]::Floor($this.IMG[0]/ 12* ($this.AlarmTime[1].Hours% 12) + $this.IMG[0]/ 12/ 60* $this.AlarmTime[1].Minutes)
+		$script:alarming[2]= [Math]::Floor($this.IMG[0]/ 12* ($this.AlarmTime[2].Hours% 12) + $this.IMG[0]/ 12/ 60* $this.AlarmTime[2].Minutes)
 
 
 		if($this.Timer_alarm.level -ne 0){
@@ -978,7 +981,7 @@ class from_Watched{
 			$script:elapsing[5]= 360/ 60* $now[2]+ 6/ 1000* $now[3]
 		}
 
-		DrawTime $script:elapsing $now $this.alm
+		DrawTime $script:elapsing $now $script:alarming
 
 	}
  } #class
@@ -1172,7 +1175,7 @@ class from_Timered{
 			if($this.Short_signal.level -eq 0){
 
 				switch($now[1]% 10){
-				4{		$this.Short_signal.Start(1,1)
+				4{		$this.Short_signal.Start(1,1); break;
 				}9{		$this.Short_signal.Start(0,2)
 				}
 				} #sw
@@ -1221,6 +1224,294 @@ write-host $this.time_adj			}
 		}
 
 		DrawStopWatch $script:elapsing $now $now
+	}
+ } #class
+ 
+class from_Watched_gimmick{ 
+
+	[int[]] $IMG= $IMG
+	[int] $milsec= $milsec
+
+	[float[]] $real
+	[float[]] $realer
+
+	[object] $Tmr
+	[System.Diagnostics.Stopwatch] $Swh
+
+	from_Watched_gimmick(){
+		$this.tmr= New-Object System.Windows.Forms.Timer
+		$this.tmr.Interval= 32
+		$this.tmr.Enabled= $False
+
+		$this.real= 0,0,0, 0,0,0
+		$this.realer= 0,0,0, 0,0,0
+		$this.swh= New-Object System.Diagnostics.Stopwatch
+	}
+
+	Size([int]$nn){
+		$this.IMG[0]= $nn
+	}
+
+	Start(){ # メソッド
+		$this.Tmr.Start()
+		$this.swh.Start()
+
+		switch($script:mode_change[0]){
+		'Watched'{	$this.RetWatch(); break;
+		}default{		$this.NextWatch()
+		}
+		} #sw
+	}
+
+	Stop(){
+		$this.Tmr.Stop()
+		$this.swh.Reset()
+	}
+
+	NextWatch(){
+		[array] $date= [datetime]::Now
+		[int[]] $now= $date.Hour, $date.Minute, $date.Second, $date.Millisecond, 0, 0
+		$now[2]+= $this.milsec/ 1000
+
+		$this.real[0]= [Math]::Floor($this.IMG[0]/ 12* ($now[0]% 12) + $this.IMG[0]/ 12/ 60* $now[1])
+		$this.real[1]= [Math]::Floor($this.IMG[0]/ 60* $now[1]+ $this.IMG[0]/ 60/ 60* $now[2])
+		$this.real[2]= [Math]::Floor($this.IMG[0]/ 60* $now[2])
+		$this.real[5]= 360/ 60* $now[2]
+
+		$this.realer[0]= $script:alarming[0]
+		$this.realer[1]= $script:alarming[1]
+		$this.realer[2]= $script:alarming[2]
+
+		if($this.real[0] -le $script:elapsing[0]){ $this.real[0]+= $this.IMG[0] } # -le 同時刻でも1cycle追加
+		if($this.real[1] -ge $script:elapsing[1]){ $this.real[1]-= $this.IMG[0] }
+		if($this.real[2] -le $script:elapsing[2]){ $this.real[2]+= $this.IMG[0] }
+		if($this.real[5] -ge $script:elapsing[5]){ $this.real[5]-= 360 }
+
+		if($this.realer[0] -ge $script:alarming[0]){ $this.realer[0]-= $this.IMG[0] }
+		if($this.realer[1] -ge $script:alarming[1]){ $this.realer[1]-= $this.IMG[0] }
+		if($this.realer[2] -ge $script:alarming[2]){ $this.realer[2]-= $this.IMG[0] }
+	}
+
+	RetWatch(){
+		[array] $date= [datetime]::Now
+		[int[]] $now= $date.Hour, $date.Minute, $date.Second, $date.Millisecond, 0, 0
+		$now[2]+= $this.milsec/ 1000
+
+		$this.real[0]= [Math]::Floor($this.IMG[0]/ 12* ($now[0]% 12) + $this.IMG[0]/ 12/ 60* $now[1])
+		$this.real[1]= [Math]::Floor($this.IMG[0]/ 60* $now[1]+ $this.IMG[0]/ 60/ 60* $now[2])
+		$this.real[2]= [Math]::Floor($this.IMG[0]/ 60* $now[2])
+		$this.real[5]= 360/ 60* $now[2]
+
+		$this.realer[0]= $script:alarming[0]
+		$this.realer[1]= $script:alarming[1]
+		$this.realer[2]= $script:alarming[2]
+
+		$this.real[0]+= $this.IMG[0] # 単に1cycle追加
+		$this.real[1]-= $this.IMG[0]
+		$this.real[2]+= $this.IMG[0]
+		$this.real[5]-= 360
+
+		$this.realer[0]-= $this.IMG[0]
+		$this.realer[1]-= $this.IMG[0]
+		$this.realer[2]-= $this.IMG[0]
+	}
+
+	Timer(){
+		if($this.swh.ElapsedMilliseconds -ge [Math]::Floor($this.milsec+ $this.milsec/ 3)){ # + $this.milsec/ 3 safety delay
+
+			$this.Stop()
+			Chg_Moder  "Start" $script:mode_change[1]
+
+			$script:mode_change[0]= $script:mode_change[1]
+			$script:mode_change[2]= $False
+
+		}else{
+
+			[float]$bai= $this.IMG[0]* $this.Swh.ElapsedMilliseconds/ $this.milsec
+			[float]$baj= 360* $this.Swh.ElapsedMilliseconds/ $this.milsec
+
+			[float[]]$elp= 0,0,0, 0,0,0
+			[float[]]$alm= 0,0,0, 0,0,0
+
+			$elp[0]= $bai+ $script:elapsing[0] # 最後の針の位置へ加算
+			$elp[1]= -$bai+ $script:elapsing[1]
+			$elp[2]= $bai+ $script:elapsing[2]
+			$elp[5]= -$baj+ $script:elapsing[5]
+
+			$alm[0]= -$bai+ $script:alarming[0]
+			$alm[1]= -$bai+ $script:alarming[1]
+			$alm[2]= -$bai+ $script:alarming[2]
+
+
+			# write-host ("Stopwth:"+ $Swh.ElapsedMilliseconds)
+			# write-host ("thisIMG:"+ $this.IMG[0])
+			# write-host ("script:elapsing:"+ $script:elapsing)
+			# write-host ("elp:"+ $elp)
+			# write-host ("real:"+ $real)
+			# read-host "pause"
+
+
+			if($elp[0] -ge $this.real[0]){ $elp[0]= $this.real[0] }
+			if($elp[1] -le $this.real[1]){ $elp[1]= $this.real[1] }
+			if($elp[2] -ge $this.real[2]){ $elp[2]= $this.real[2] }
+			if($elp[5] -le $this.real[5]){ $elp[5]= $this.real[5] }
+
+			if($alm[0] -le $this.realer[0]){ $alm[0]= $this.realer[0] }
+			if($alm[1] -le $this.realer[1]){ $alm[1]= $this.realer[1] }
+			if($alm[2] -le $this.realer[2]){ $alm[2]= $this.realer[2] }
+
+			[float[]]$ren= 0,0,0, 0,0,0
+			$ren[0]= [Math]::Floor(600/ $this.IMG[0]* $elp[0]/ 50)% 12 # タイムの割り出し # 600は固定値
+			if($ren[0] -eq 0){ $ren[0]= 12 }
+			$ren[1]= [Math]::Floor(600/ $this.IMG[0]* $elp[1]/ 10)% 60
+			if($ren[1] -lt 0){ $ren[1]= 60+ $ren[1] }
+			$ren[2]= [Math]::Floor(600/ $this.IMG[0]* $elp[2]/ 10)% 60
+
+			switch($script:mode_change[0]){ # wth -> wth / stopwth -> wth
+			'Watched'{
+				DrawTime $elp $ren $alm
+				break;
+			}default{
+				DrawStopWatch $elp $ren $ren
+			}
+			} #sw
+		}
+	}
+ } #class
+ 	
+<# 
+ 
+class from_Watched{ 
+
+	# フィールド
+	[int[]] $IMG= $IMG
+	[array] $alm= 0,0,0
+
+	[bool[]]$setalarm= "","","",""
+	[array]$AlarmTime= "","",""
+
+	[object] $tmr
+	[object] $Short_signal= $Short_signal
+	[object] $Timer_alarm= $Timer_alarm
+
+	from_Watched(){
+
+		$this.tmr= New-Object System.Windows.Forms.Timer
+		$this.tmr.Interval= 200
+		$this.tmr.Enabled= $False
+
+		$this.setalarm[0]= Toggle $True 0
+		$this.setalarm[1]= Toggle $True 1
+		$this.setalarm[2]= Toggle $True 2
+		$this.setalarm[3]= Toggle $True 3 # jiho
+
+		$this.AlarmTime[0]= New-Object TimeSpan(7,1,0)
+		$this.AlarmTime[1]= New-Object TimeSpan(10,15,0)
+		$this.AlarmTime[2]= New-Object TimeSpan(15,15,0)
+	}
+
+	Size([int]$nn){
+		$this.IMG[0]= $nn
+	}
+
+	Start(){ # メソッド
+		$this.Tmr.Start()
+	}
+
+	Stop(){
+		$this.Tmr.Stop()
+	}
+
+	Reset(){
+		$this.Tmr.Start()
+	}
+
+	[void] Timer(){
+
+		$date= [datetime]::Now
+
+		[int[]]$now= $date.Hour, $date.Minute, $date.Second, $date.Millisecond, "", ""
+
+		if($this.SetAlarm[3] -eq $True){
+
+			if(($now[1]% 2) -eq 0){
+			if($now[2] -eq 0){
+
+				if($this.Short_signal.level -eq 0){
+
+					switch($now[1]){
+					30{
+						$this.Short_signal.Start(1,1)
+
+					}0{
+						$this.Short_signal.Start(0,($now[0]% 12))
+					}
+					} #sw
+				}
+			}
+			}
+		}
+
+		if($this.SetAlarm[0] -eq $True){
+
+			if($now[0] -eq $this.AlarmTime[0].Hours){
+			if($now[1] -eq $this.AlarmTime[0].Minutes){
+			if($now[2] -eq $this.AlarmTime[0].Seconds){
+
+				if($this.Timer_alarm.level -eq 0){
+
+					$this.Timer_alarm.start(0)	# one shot
+				}
+			}
+			}
+			}
+		}
+		if($this.SetAlarm[1] -eq $True){
+
+			if($now[0] -eq $this.AlarmTime[1].Hours){
+			if($now[1] -eq $this.AlarmTime[1].Minutes){
+			if($now[2] -eq $this.AlarmTime[1].Seconds){
+
+				if($this.Timer_alarm.level -eq 0){
+
+					$this.Timer_alarm.start(1)
+				}
+			}
+			}
+			}
+		}
+		if($this.SetAlarm[2] -eq $True){
+
+			if($now[0] -eq $this.AlarmTime[2].Hours){
+			if($now[1] -eq $this.AlarmTime[2].Minutes){
+			if($now[2] -eq $this.AlarmTime[2].Seconds){
+
+				if($this.Timer_alarm.level -eq 0){
+
+					$this.Timer_alarm.start(2)
+				}
+			}
+			}
+			}
+		}
+
+		$script:elapsing[0]= [Math]::Floor($this.IMG[0]/ 12* ($now[0]% 12) + $this.IMG[0]/ 12/ 60* $now[1])
+		$script:elapsing[1]= [Math]::Floor($this.IMG[0]/ 60* $now[1]+ $this.IMG[0]/ 60/ 60* $now[2])
+		$script:elapsing[2]= [Math]::Floor($this.IMG[0]/ 60* $now[2])
+
+		$this.alm[0]= [Math]::Floor($this.IMG[0]/ 12* ($this.AlarmTime[0].Hours% 12) + $this.IMG[0]/ 12/ 60* $this.AlarmTime[0].Minutes)
+		$this.alm[1]= [Math]::Floor($this.IMG[0]/ 12* ($this.AlarmTime[1].Hours% 12) + $this.IMG[0]/ 12/ 60* $this.AlarmTime[1].Minutes)
+		$this.alm[2]= [Math]::Floor($this.IMG[0]/ 12* ($this.AlarmTime[2].Hours% 12) + $this.IMG[0]/ 12/ 60* $this.AlarmTime[2].Minutes)
+
+
+		if($this.Timer_alarm.level -ne 0){
+			$script:elapsing[5]= 360/ 1000* $now[3]	# 回転飾り
+		}else{
+			$script:elapsing[5]= 360/ 60* $now[2]+ 6/ 1000* $now[3]
+		}
+
+		DrawTime $script:elapsing $now $this.alm
+
 	}
  } #class
  
@@ -1330,7 +1621,7 @@ class from_Watched_gimmick{
 
 			switch($script:mode_change[0]){ # wth -> wth / stopwth -> wth
 			'Watched'{
-				DrawTime $elp $ren $ren
+				DrawTime $elp $ren $script:Watched.alm
 			}default{
 				DrawStopWatch $elp $ren $ren
 			}
@@ -1338,6 +1629,8 @@ class from_Watched_gimmick{
 		}
 	}
  } #class
+ 
+#> 
  
 class from_StopWatched_gimmick{ 
 
@@ -1444,13 +1737,10 @@ class from_StopWatched_gimmick{
   
 [double]$pi= [Math]::PI # 180度のラジアン値 
 
-
-[array]$pointed= "","" # hari, dia
-
-$pointed[0]= Reso 9 # point obj
-# $pointed[1]= Reso 5
+[array] $pointed= Reso 9 # point obj
 
 [float[]]$elapsing= 0,0,0, 0,0,0 # -- position [hour,min,sec,,,milsec]
+[float[]]$alarming= 0,0,0, 0,0,0 #
 
 
 [int]$milsec= 1000 # gimmik time
@@ -1459,7 +1749,7 @@ $pointed[0]= Reso 9 # point obj
 # [int]$alarmsec= 0
 # [int[]]$short_count= 0,0,0 # on/off count times
 # [int]$keyoff= 0
- 	
+ 
 # $Timspan= New-Object TimeSpan 
  
 # $Stopwth= New-Object System.Diagnostics.Stopwatch 
@@ -1718,7 +2008,7 @@ $contxt0set= New-Object System.Windows.Forms.ToolStripMenuItem
 $contxt0set.Add_Click({
 
 	switch($setalarm[0]){
-	$True{		$script:setalarm[0]= Toggle $False 0
+	$True{	$script:setalarm[0]= Toggle $False 0
 	}$False{	$script:setalarm[0]= Toggle $True 0
 	}
 	} #sw
@@ -1728,7 +2018,7 @@ $contxt1set= New-Object System.Windows.Forms.ToolStripMenuItem
 $contxt1set.Add_Click({
 
 	switch($setalarm[1]){
-	$True{		$script:setalarm[1]= Toggle $False 1
+	$True{	$script:setalarm[1]= Toggle $False 1
 	}$False{	$script:setalarm[1]= Toggle $True 1
 	}
 	} #sw
@@ -1738,7 +2028,7 @@ $contxt2set= New-Object System.Windows.Forms.ToolStripMenuItem
 $contxt2set.Add_Click({
 
 	switch($setalarm[2]){
-	$True{		$script:setalarm[2]= Toggle $False 2
+	$True{	$script:setalarm[2]= Toggle $False 2
 	}$False{	$script:setalarm[2]= Toggle $True 2
 	}
 	} #sw
@@ -1748,7 +2038,7 @@ $contxt3set= New-Object System.Windows.Forms.ToolStripMenuItem
 $contxt3set.Add_Click({
 
 	switch($setalarm[3]){
-	$True{		$script:setalarm[3]= Toggle $False 3
+	$True{	$script:setalarm[3]= Toggle $False 3
 	}$False{	$script:setalarm[3]= Toggle $True 3
 	}
 	} #sw
@@ -1765,7 +2055,7 @@ $contxt.Items.AddRange(@($contxt_size, $menu_c, $contxt_aset))
 # ------------ 
  
 # メニュー 
-	
+	 
 $menu_f= New-Object System.Windows.Forms.ToolStripMenuItem 
 $menu_f.Text= "Mode"
 
@@ -1881,14 +2171,14 @@ $menu_a.Text= "Alarm"
 	 
 $menu_set= New-Object System.Windows.Forms.ToolStripMenuItem 
 $menu_set.Text= "Alarm Set"
-	
+	 
 $menu0set= New-Object System.Windows.Forms.ToolStripMenuItem 
 # $menu0set.Text= "0 AlarmReset"
 $menu0set.Add_Click({
 
-	switch($setalarm[0]){
-	$True{	$script:setalarm[0]= Toggle $False 0
-	}$False{	$script:setalarm[0]= Toggle $True 0
+	switch($Watched.setalarm[0]){
+	$True{	$Watched.setalarm[0]= Toggle $False 0
+	}$False{	$Watched.setalarm[0]= Toggle $True 0
 	}
 	} #sw
  })
@@ -1897,9 +2187,9 @@ $menu1set= New-Object System.Windows.Forms.ToolStripMenuItem
 # $menu1set.Text= "1 AlarmReset"
 $menu1set.Add_Click({
 
-	switch($setalarm[1]){
-	$True{	$script:setalarm[1]= Toggle $False 1
-	}$False{	$script:setalarm[1]= Toggle $True 1
+	switch($Watched.setalarm[1]){
+	$True{	$Watched.setalarm[1]= Toggle $False 1
+	}$False{	$Watched.setalarm[1]= Toggle $True 1
 	}
 	} #sw
  })
@@ -1908,9 +2198,9 @@ $menu2set= New-Object System.Windows.Forms.ToolStripMenuItem
 # $menu2set.Text= "2 AlarmReset"
 $menu2set.Add_Click({
 
-	switch($setalarm[2]){
-	$True{	$script:setalarm[2]= Toggle $False 2
-	}$False{	$script:setalarm[2]= Toggle $True 2
+	switch($Watched.setalarm[2]){
+	$True{	$Watched.setalarm[2]= Toggle $False 2
+	}$False{	$Watched.setalarm[2]= Toggle $True 2
 	}
 	} #sw
  })
@@ -1919,9 +2209,9 @@ $menu3set= New-Object System.Windows.Forms.ToolStripMenuItem
 # $menu3set.Text= "3 Jiho Reset"
 $menu3set.Add_Click({
 
-	switch($setalarm[3]){
-	$True{	$script:setalarm[3]= Toggle $False 3
-	}$False{	$script:setalarm[3]= Toggle $True 3
+	switch($Watched.setalarm[3]){
+	$True{	$Watched.setalarm[3]= Toggle $False 3
+	}$False{	$Watched.setalarm[3]= Toggle $True 3
 	}
 	} #sw
  })
@@ -2044,7 +2334,7 @@ $Watched.tmr.Add_Tick({
 	$Watched.Timer()
 })
 
-$Watched.tmr.Start()
+Chg_Moder  "Start" $script:mode_change[0]
 
 $frm.ShowDialog() > $null
 
