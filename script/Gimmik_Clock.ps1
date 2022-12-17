@@ -711,7 +711,7 @@ class from_Swipe{
 		}
 	}
  } #class
- 	
+ 
 class from_Short_signal{ 
 
 	# フィールド、# [内部データ(プロパティ)]
@@ -1363,9 +1363,9 @@ class from_Watched_gimmick{
 		if($this.real[2] -le $script:elapsing[2]){ $this.real[2]+= $this.IMG[0] }
 		if($this.real[5] -ge $script:elapsing[5]){ $this.real[5]-= 360 }
 
-		if($this.realer[0] -ge $script:alarming[0]){ $this.realer[0]-= $this.IMG[0] }
-		if($this.realer[1] -ge $script:alarming[1]){ $this.realer[1]-= $this.IMG[0] }
-		if($this.realer[2] -ge $script:alarming[2]){ $this.realer[2]-= $this.IMG[0] }
+		if($this.realer[0] -ge $script:alarming[0]){ $this.realer[0]+= $this.IMG[0] }
+		if($this.realer[1] -ge $script:alarming[1]){ $this.realer[1]+= $this.IMG[0] }
+		if($this.realer[2] -ge $script:alarming[2]){ $this.realer[2]+= $this.IMG[0] }
 	}
 
 	RetWatch(){
@@ -1374,9 +1374,9 @@ class from_Watched_gimmick{
 		$this.real[2]+= $this.IMG[0]
 		$this.real[5]-= 360
 
-		$this.realer[0]-= $this.IMG[0]
-		$this.realer[1]-= $this.IMG[0]
-		$this.realer[2]-= $this.IMG[0]
+		$this.realer[0]+= $this.IMG[0]
+		$this.realer[1]+= $this.IMG[0]
+		$this.realer[2]+= $this.IMG[0]
 	}
 
 	Timer(){
@@ -1390,21 +1390,21 @@ class from_Watched_gimmick{
 
 		}else{
 
-			[float]$bah= $this.IMG[0]* 2 * $this.Swh.ElapsedMilliseconds/ $this.milsec
-			[float]$bai= $this.IMG[0]* $this.Swh.ElapsedMilliseconds/ $this.milsec
-			[float]$baj= 360* $this.Swh.ElapsedMilliseconds/ $this.milsec
+			[float] $bai= $this.IMG[0]* $this.Swh.ElapsedMilliseconds/ $this.milsec
+			[float] $bah= $bai*2
+			[float] $baj= 360* $this.Swh.ElapsedMilliseconds/ $this.milsec
 
-			[float[]]$elp= 0,0,0, 0,0,0
-			[float[]]$alm= 0,0,0, 0,0,0
+			[float[]] $elp= 0,0,0, 0,0,0
+			[float[]] $alm= 0,0,0, 0,0,0
 
 			$elp[0]= $bai+ $script:elapsing[0] # 最後の針の位置へ加算
 			$elp[1]= -$bai+ $script:elapsing[1]
 			$elp[2]= $bai+ $script:elapsing[2]
 			$elp[5]= -$baj+ $script:elapsing[5]
 
-			$alm[0]= -$bah+ $script:alarming[0]
-			$alm[1]= -$bah+ $script:alarming[1]
-			$alm[2]= -$bah+ $script:alarming[2]
+			$alm[0]= $bah+ $script:alarming[0]
+			$alm[1]= $bah+ $script:alarming[1]
+			$alm[2]= $bah+ $script:alarming[2]
 
 
 			# write-host ("Stopwth:"+ $Swh.ElapsedMilliseconds)
@@ -1420,9 +1420,9 @@ class from_Watched_gimmick{
 			if($elp[2] -ge $this.real[2]){ $elp[2]= $this.real[2] }
 			if($elp[5] -le $this.real[5]){ $elp[5]= $this.real[5] }
 
-			if($alm[0] -le $this.realer[0]){ $alm[0]= $this.realer[0] }
-			if($alm[1] -le $this.realer[1]){ $alm[1]= $this.realer[1] }
-			if($alm[2] -le $this.realer[2]){ $alm[2]= $this.realer[2] }
+			if($alm[0] -ge $this.realer[0]){ $alm[0]= $this.realer[0] }
+			if($alm[1] -ge $this.realer[1]){ $alm[1]= $this.realer[1] }
+			if($alm[2] -ge $this.realer[2]){ $alm[2]= $this.realer[2] }
 
 
 			[float[]]$ren= 0,0,0, 0,0,0
@@ -1445,7 +1445,7 @@ class from_Watched_gimmick{
 		}
 	}
  } #class
- 
+ 	
 class from_StopWatched_gimmick{ 
 
 	[int[]] $IMG= $IMG
@@ -1537,9 +1537,9 @@ class from_StopWatched_gimmick{
 		if($this.real[2] -le $script:elapsing[2]){ $this.real[2]+= $this.IMG[0] }
 		if($this.real[5] -ge $script:elapsing[5]){ $this.real[5]-= 360 }
 
-		if($this.realer[0] -ge $script:alarming[0]){ $this.realer[0]-= $this.IMG[0] }
-		if($this.realer[1] -ge $script:alarming[1]){ $this.realer[1]-= $this.IMG[0] }
-		if($this.realer[2] -ge $script:alarming[2]){ $this.realer[2]-= $this.IMG[0] }
+		if($this.realer[0] -ge $script:alarming[0]){ $this.realer[0]+= $this.IMG[0] }
+		if($this.realer[1] -ge $script:alarming[1]){ $this.realer[1]+= $this.IMG[0] }
+		if($this.realer[2] -ge $script:alarming[2]){ $this.realer[2]+= $this.IMG[0] }
 	}
 
 	RetWatch(){
@@ -1548,9 +1548,9 @@ class from_StopWatched_gimmick{
 		$this.real[2]+= $this.IMG[0]
 		$this.real[5]-= 360
 
-		$this.realer[0]-= $this.IMG[0]
-		$this.realer[1]-= $this.IMG[0]
-		$this.realer[2]-= $this.IMG[0]
+		$this.realer[0]+= $this.IMG[0]
+		$this.realer[1]+= $this.IMG[0]
+		$this.realer[2]+= $this.IMG[0]
 	}
 
 	Timer(){
@@ -1565,20 +1565,20 @@ class from_StopWatched_gimmick{
 
 		}else{
 
-			$bah= $this.IMG[0]*2 * $this.swh.ElapsedMilliseconds/ $this.milsec
-			$bai= $this.IMG[0] * $this.swh.ElapsedMilliseconds/ $this.milsec
-			$baj= 360* $this.swh.ElapsedMilliseconds/ $this.milsec
+			[float] $bai= $this.IMG[0] * $this.swh.ElapsedMilliseconds/ $this.milsec
+			[float] $bah= $bai*2
+			[float] $baj= 360* $this.swh.ElapsedMilliseconds/ $this.milsec
 
 			[float[]] $elp= 0,0,0, 0,0,0
-			[float[]]$alm= 0,0,0, 0,0,0
+			[float[]] $alm= 0,0,0, 0,0,0
 			$elp[0]= $bai+ $script:elapsing[0]
 			$elp[1]= -$bai+ $script:elapsing[1]
 			$elp[2]= $bai+ $script:elapsing[2]
 			$elp[5]= -$baj+ $script:elapsing[5]
 
-			$alm[0]= -$bah+ $script:alarming[0]
-			$alm[1]= -$bah+ $script:alarming[1]
-			$alm[2]= -$bah+ $script:alarming[2]
+			$alm[0]= $bah+ $script:alarming[0]
+			$alm[1]= $bah+ $script:alarming[1]
+			$alm[2]= $bah+ $script:alarming[2]
 
 
 
@@ -1587,9 +1587,9 @@ class from_StopWatched_gimmick{
 			if($elp[2] -ge $this.real[2]){ $elp[2]= $this.real[2] }
 			if($elp[5] -le $this.real[5]){ $elp[5]= $this.real[5] }
 
-			if($alm[0] -le $this.realer[0]){ $alm[0]= $this.realer[0] }
-			if($alm[1] -le $this.realer[1]){ $alm[1]= $this.realer[1] }
-			if($alm[2] -le $this.realer[2]){ $alm[2]= $this.realer[2] }
+			if($alm[0] -ge $this.realer[0]){ $alm[0]= $this.realer[0] }
+			if($alm[1] -ge $this.realer[1]){ $alm[1]= $this.realer[1] }
+			if($alm[2] -ge $this.realer[2]){ $alm[2]= $this.realer[2] }
 
 
 			[float[]] $ren= 0,0,0, 0,0,0
