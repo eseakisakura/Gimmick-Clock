@@ -15,6 +15,7 @@
 クラス対応したps5以降でのみ、使用できます。<br>
 <br>
 もし使用する際は、scriptディレクトリにある、<br>
+Gimmik_Clock.cmd, Gimmik_Clock.ps1 の両ファイルを保存、<br>
 Gimmik_Clock.cmd から起動してみて下さい。<br>
 </div>
 <br>
