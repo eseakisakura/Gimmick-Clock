@@ -9,9 +9,9 @@
 Add-Type -AssemblyName System.Windows.Forms > $null 
 Add-Type -AssemblyName System.Drawing > $null
 
-cd (Split-Path -Parent $MyInvocation.MyCommand.Path)
+cd (Split-Path -Parent $PSCommandPath)
 [Environment]::CurrentDirectory= pwd # working_dir set
- 
+ 	
 # function 
 	 
 function Recolor_Set([int]$nn){ 
@@ -136,7 +136,7 @@ function XYpos([float]$num, [float]$width, [float]$height){
 	$rad[2]= ($num- $width)* $pi* 2/ $IMG[0]
 
 	$rad[3]= ($num+ $IMG[0]/ 2- $width)* $pi* 2/ $IMG[0]
-	$rad[4]= ($num+ $IMG[0]/ 2)* $pi* 2/ $IMG[0]
+	$rad[4]= ($num+ $IMG[0]/ 2)* $pi* 2/ $IMG[0]		# 針の後ろ側
 	$rad[5]= ($num+ $IMG[0]/ 2+ $width)* $pi* 2/ $IMG[0]
 
 	[float[]]$fx= 0,0,0, 0,0,0
@@ -1445,7 +1445,7 @@ class from_Watched_gimmick{
 		}
 	}
  } #class
- 	
+ 
 class from_StopWatched_gimmick{ 
 
 	[int[]] $IMG= $IMG
@@ -1854,10 +1854,10 @@ $Minute_pen2= New-Object System.Drawing.Pen($gb2, 1)
 $Second_pen2= New-Object System.Drawing.Pen($rb2, 1)
   
 # グラフィックス領域の確保 
-	
+	 
 [int[]]$IMG= @(600, 600) # グラフのサイズ 
 [int[]]$buff_size= @(($IMG[0]+ 2), ($IMG[1]+ 2))
-[int[]]$center= (($buff_size[0]/ 2), ($buff_size[1]/ 2)) # センター
+[int[]]$center= @(($buff_size[0]/ 2), ($buff_size[1]/ 2)) # センター
 
  
 $image= New-Object System.Drawing.Bitmap($IMG) # 書き込む場所 
@@ -1868,6 +1868,7 @@ $image= New-Object System.Drawing.Bitmap($IMG) # 書き込む場所
 $graphics= [System.Drawing.Graphics]::FromImage($image)
 $graphics.CompositingQuality= "HighQuality"
 $graphics.SmoothingMode= "HighQuality"
+$graphics.PixelOffsetMode= "HighQuality"
 
 $Pictbox= New-Object System.Windows.Forms.PictureBox # 描画領域
 $Pictbox.ClientSize= $image.Size
